@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package proyecto;
+import proyecto.Mantenimiento.frmProducto;
+import proyecto.Mantenimiento.frmEmpleados;
+import proyecto.Mantenimiento.frmClientes;
+import proyecto.Mantenimiento.frmInventario;
+import proyecto.Mantenimiento.frmFacturas;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
@@ -76,7 +81,6 @@ public class Menu extends javax.swing.JFrame {
         mnuFacturas1 = new javax.swing.JMenu();
         mnuAgregarFacturas2 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        mnuAgregarFacturas3 = new javax.swing.JMenuItem();
         mnuAgregarFacturas4 = new javax.swing.JMenuItem();
         mnuInventarizar2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -211,15 +215,6 @@ public class Menu extends javax.swing.JFrame {
         });
         mnuFacturas1.add(jMenuItem2);
 
-        mnuAgregarFacturas3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fctra.png"))); // NOI18N
-        mnuAgregarFacturas3.setText("Facturas");
-        mnuAgregarFacturas3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuAgregarFacturas3ActionPerformed(evt);
-            }
-        });
-        mnuFacturas1.add(mnuAgregarFacturas3);
-
         mnuAgregarFacturas4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fctra.png"))); // NOI18N
         mnuAgregarFacturas4.setText("Detalle Facturas");
         mnuAgregarFacturas4.addActionListener(new java.awt.event.ActionListener() {
@@ -268,7 +263,7 @@ public class Menu extends javax.swing.JFrame {
         mnuUsuario.setBackground(new java.awt.Color(255, 255, 255));
         mnuUsuario.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         mnuUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/usuarioIcono.png"))); // NOI18N
-        mnuUsuario.setText("Seguridad");
+        mnuUsuario.setText("Configurar");
 
         mnuAgregarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo personal.png"))); // NOI18N
         mnuAgregarUsuarios.setText("Usuarios");
@@ -313,7 +308,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuAgregarUsuariosActionPerformed
 
     private void mnuAgregarServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarServiciosActionPerformed
-        frmServicios abrir=new frmServicios();
+        //frmServicios abrir=new frmServicios();
         this.escritorio.add(abrir);
         abrir.show(true);
     }//GEN-LAST:event_mnuAgregarServiciosActionPerformed
@@ -347,10 +342,6 @@ public class Menu extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void mnuAgregarFacturas3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarFacturas3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuAgregarFacturas3ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
@@ -408,7 +399,6 @@ public class Menu extends javax.swing.JFrame {
     javax.swing.JMenuItem mnuAgregarEmpleados;
     javax.swing.JMenuItem mnuAgregarFacturas;
     javax.swing.JMenuItem mnuAgregarFacturas2;
-    javax.swing.JMenuItem mnuAgregarFacturas3;
     javax.swing.JMenuItem mnuAgregarFacturas4;
     javax.swing.JMenuItem mnuAgregarServicios;
     javax.swing.JMenuItem mnuAgregarUsuarios;
