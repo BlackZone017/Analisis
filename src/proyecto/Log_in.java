@@ -118,11 +118,31 @@ public class Log_in extends javax.swing.JFrame {
     }//GEN-LAST:event_txtusuActionPerformed
 
     private void IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarActionPerformed
-//        consultas acc = new consultas();
-//        
-//         if (acc.verificar(this.txtusu.getText(),this.txtContra.getText(),this.cboUsuario.getSelectedItem().toString())){
+        //Sconsultas acc = new consultas();
+        
+        consultas con = new consultas();
+        
+        //Condicion para evaluar si las credenciales son correctas mediante el metodo [verificar]
+        if(con.verificar(txtusu.getText(), txtContra.getText())){
+            
+            JOptionPane.showMessageDialog(rootPane,"Has Ingresado al Sistema como "+txtusu.getText(),
+                     "Bienvenido...",JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "No se pudo acceder al Sistema \nUsuario, Contraseña o Perfil Incorrecto(a)","Sistema",JOptionPane.WARNING_MESSAGE);
+             cont ++;
+        }
+        
+        //Si se trata de logear [mal] 5 veces seguidas, se cierra el programa
+        if(cont==5){
+            JOptionPane.showMessageDialog(rootPane,"Ha sobrepasado el Limite de Entrada","Limite Excedido",JOptionPane.ERROR_MESSAGE);
+             System.exit(0);
+        }
+        
+//         if (acc.verificar(this.txtusu.getText(),this.txtContra.getText())){
 //             
-//             JOptionPane.showMessageDialog(rootPane,"Has Ingresado al Sistema como "+this.cboUsuario.getSelectedItem().toString(),
+//             JOptionPane.showMessageDialog(rootPane,"Has Ingresado al Sistema como ",
 //                     "Welcome",JOptionPane.INFORMATION_MESSAGE);
 //             
 //             
@@ -149,7 +169,7 @@ public class Log_in extends javax.swing.JFrame {
 //         if(cont==3){
 //             JOptionPane.showMessageDialog(rootPane,"Ha sobrepasado el Limite de Entrada","Limite Excedido",JOptionPane.ERROR_MESSAGE);
 //             System.exit(0);
-//         }
+        // }
     }//GEN-LAST:event_IngresarActionPerformed
 
     private void txtContraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraKeyPressed

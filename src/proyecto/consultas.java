@@ -14,25 +14,62 @@ public class consultas {
     ResultSet rs=null;
     String query;
     
-    public boolean verificar (String user,String pwr, String tipo){
+    public void conectar(){
+        // Implementacion Metodos de la Conexion
+        try{
+            conect= con.conexion();
+            st=conect.createStatement();
+            
+        }catch(java.sql.SQLException ex){
+            JOptionPane.showMessageDialog(null,"Error SQL "+ex);
+        }
+    }
+    
+    public boolean verificar (String usuario,String contra){
         
-        int sw=0;
-        query="Select * from Usuarios where nom_usu='"+user+"'and contra_usu='"+pwr+"'and tipo='"+tipo+"'";
+       int retorno=0;
+        query="SELECT usuario, password FROM usuario WHERE usuario='"+usuario
+                +"' AND password='"+contra+"';";
+        
         try{
             conect=con.conexion();
             st=conect.createStatement();
             rs=st.executeQuery(query);
             while(rs.next()){
-                if(rs.getString(1)==null)
-                    sw=0;
-                else
-                    sw=1;
-                
+                if(rs.getString(1)==null){
+                    retorno=0;
+                }else{
+                    retorno=1;
+                }
             }
-        }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"Error SQL "+ex);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Error: "+ex);
         }
-        if (sw==1) return true;
-        else return false;
+        
+        if(retorno==1){return true;}
+        return false;
 }
+//    
+//    public void getRol(String user,String pwr){
+//        int sw=0;
+//        query="Select rol from Usuarios where nom_usu='"+user+"'and contra_usu='"+pwr+";";
+//        try{
+//            conect=con.conexion();
+//            st=conect.createStatement();
+//            rs=st.executeQuery(query);
+//            String rol = rs.toString();
+//            System.out.println("El rol es: "+rol);
+////            while(rs.next()){
+////                if(rs.getString(1)==null)
+////                    sw=0;
+////                else
+////                    sw=1;
+////                
+////            }
+//        }catch(SQLException ex){
+//            JOptionPane.showMessageDialog(null,"Error SQL "+ex);
+//        }
+//        
+//    }
 }

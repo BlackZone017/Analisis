@@ -273,7 +273,7 @@
             <Property name="text" type="java.lang.String" value="Configurar"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnuAgregarUsuarios">
+            <MenuItem class="javax.swing.JMenuItem" name="mnuAgregarUsuarios1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/nuevo personal.png"/>
@@ -281,7 +281,7 @@
                 <Property name="text" type="java.lang.String" value="Usuarios"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuAgregarUsuariosActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuAgregarUsuarios1ActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

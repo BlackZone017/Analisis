@@ -87,7 +87,7 @@ public class Menu extends javax.swing.JFrame {
         mnuServicios = new javax.swing.JMenu();
         mnuAgregarServicios = new javax.swing.JMenuItem();
         mnuUsuario = new javax.swing.JMenu();
-        mnuAgregarUsuarios = new javax.swing.JMenuItem();
+        mnuAgregarUsuarios1 = new javax.swing.JMenuItem();
         mnuEmpresa = new javax.swing.JMenu();
         mnuSucursales = new javax.swing.JMenu();
 
@@ -265,14 +265,14 @@ public class Menu extends javax.swing.JFrame {
         mnuUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/usuarioIcono.png"))); // NOI18N
         mnuUsuario.setText("Configurar");
 
-        mnuAgregarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo personal.png"))); // NOI18N
-        mnuAgregarUsuarios.setText("Usuarios");
-        mnuAgregarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+        mnuAgregarUsuarios1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo personal.png"))); // NOI18N
+        mnuAgregarUsuarios1.setText("Usuarios");
+        mnuAgregarUsuarios1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuAgregarUsuariosActionPerformed(evt);
+                mnuAgregarUsuarios1ActionPerformed(evt);
             }
         });
-        mnuUsuario.add(mnuAgregarUsuarios);
+        mnuUsuario.add(mnuAgregarUsuarios1);
 
         jMenuBar1.add(mnuUsuario);
 
@@ -300,12 +300,6 @@ public class Menu extends javax.swing.JFrame {
         this.escritorio.add(abrir);
         abrir.show(true);
     }//GEN-LAST:event_mnuAgregarEmpleadosActionPerformed
-
-    private void mnuAgregarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarUsuariosActionPerformed
-        frmUsuarios abrir=new frmUsuarios();
-        this.escritorio.add(abrir);
-        abrir.show(true);
-    }//GEN-LAST:event_mnuAgregarUsuariosActionPerformed
 
     private void mnuAgregarServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarServiciosActionPerformed
         //frmServicios abrir=new frmServicios();
@@ -350,6 +344,10 @@ public class Menu extends javax.swing.JFrame {
     private void mnuAgregarFacturas4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarFacturas4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mnuAgregarFacturas4ActionPerformed
+
+    private void mnuAgregarUsuarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarUsuarios1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuAgregarUsuarios1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -401,7 +399,7 @@ public class Menu extends javax.swing.JFrame {
     javax.swing.JMenuItem mnuAgregarFacturas2;
     javax.swing.JMenuItem mnuAgregarFacturas4;
     javax.swing.JMenuItem mnuAgregarServicios;
-    javax.swing.JMenuItem mnuAgregarUsuarios;
+    javax.swing.JMenuItem mnuAgregarUsuarios1;
     javax.swing.JMenu mnuArticulos;
     javax.swing.JMenu mnuClientes;
     javax.swing.JMenu mnuEmpleados;

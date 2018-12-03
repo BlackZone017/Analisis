@@ -55,8 +55,8 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 102));
-        jLabel1.setText("USUARIOS");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
+        jLabel1.setText("Configurar Usuarios");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
         jLabel2.setText("Usuario");

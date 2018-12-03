@@ -18,6 +18,8 @@ public class Splash extends javax.swing.JFrame {
     
     public Splash() {
         initComponents();
+        conectar con = new conectar();
+        con.conexion();
         this.setLocationRelativeTo(null);
         
         ac = new ActionListener(){
@@ -53,20 +55,6 @@ public class Splash extends javax.swing.JFrame {
         t.start();
     }
 
-//   public class progreso implements ActionListener{
-//        public void actionPerformed(ActionEvent evt){
-//            int n=jProgressBar1.getValue();
-//            
-//            if (n<100){
-//                n++;
-//                jProgressBar1.setValue(n);
-//            }else{
-//                timer.stop();
-//                Log_in abrir=new Log_in();
-//                abrir.setVisible(true);
-//            }
-//        }
-//    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
