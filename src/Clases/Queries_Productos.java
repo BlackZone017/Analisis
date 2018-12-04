@@ -16,7 +16,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author gouripc
  */
-public class Queries_Facturas {
+public class Queries_Productos {
+    
     DefaultTableModel ModeloTabla; //Objeto para llenar la tabla
     conectar conn=new conectar();
     
@@ -27,11 +28,11 @@ public class Queries_Facturas {
     
     public void buscar(JTable tabla){
         //Columnas a mostrarse en la tabla
-        String [] columnas={"ID Factura","Cliente","Empleado", "Producto","Cantidad","Precio","Tipo Pago","fecha"};
-        String [] registros=new String[9];
+        String [] columnas={"ID Producto","Nombre","Precio", "Descripcion","Stock"};
+        String [] registros=new String[5];
         ModeloTabla=new DefaultTableModel(null,columnas);
         
-        query = "SELECT * FROM factura"; //Query que ejecutare
+        query = "SELECT * FROM producto"; //Query que ejecutare
         
         try{
             conn.conexion(); //hago la conexion
@@ -39,14 +40,11 @@ public class Queries_Facturas {
             resultado=ejecutar.executeQuery(query); //le paso la query a mi declaracion y le paso los valores al result set
             
             while(resultado.next()){
-                registros[0]=resultado.getString("idFactura");
-                registros[1]=resultado.getString("idCliente");
-                registros[2]=resultado.getString("idEmpleado");
-                registros[3]=resultado.getString("idProducto");
-                registros[4]=resultado.getString("cantidad");
-                registros[5]=resultado.getString("precio");
-                registros[6]=resultado.getString("tipoPago");
-                registros[7]=resultado.getString("fecha");
+                registros[0]=resultado.getString("idProducto");
+                registros[1]=resultado.getString("nombre");
+                registros[2]=resultado.getString("precio");
+                registros[3]=resultado.getString("descripcion");
+                registros[4]=resultado.getString("stock");
                 
                 ModeloTabla.addRow(registros);
             }
@@ -67,7 +65,7 @@ public class Queries_Facturas {
             //de asistencias, y luego de esta tabla, pues ya no habría relacion
             
             //Elimina el registro a traves del id del asistente
-            PreparedStatement pstm1 = conn.conexion().prepareStatement("DELETE FROM factura WHERE idFactura=?");
+            PreparedStatement pstm1 = conn.conexion().prepareStatement("DELETE FROM producto WHERE idProducto=?");
             pstm1.setString(1, codigo);
             pstm1.execute();
             pstm1.close();
@@ -79,14 +77,13 @@ public class Queries_Facturas {
         }
     }
     
-    public void modificar(String codigo, String cliente, String empleado,String producto, String cantidad, String precio, String tipoPago,String fecha){
+    public void modificar(String codigo, String nombre, String precio,String descripcion, String cantidad){
         conn.conexion();
         try{
             conn.conexion();
             Statement query = conn.conexion().createStatement();
-            query.execute("update factura set idCliente = '"+cliente+"', idEmpleado = '"+empleado+
-                   "', idProducto='"+producto+"', cantidad='"+cantidad+"', precio='"+precio+
-                    "', tipoPago='"+tipoPago+"', fecha='"+fecha+"' where idFactura="+codigo);
+            query.execute("update producto set nombre = '"+nombre+"', precio = '"+precio+
+                   "', descripcion='"+descripcion+"', stock='"+cantidad+"' where idProducto="+codigo);
             
                 
         }catch(Exception e){

@@ -7,7 +7,8 @@ package proyecto.Informes_y_usuarios;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
-import Clases.ConsultaUsuarios;
+import Clases.Queries_Usuarios;
+import Clases.conectar;
 
 public class frmUsuarios extends javax.swing.JInternalFrame {
 
@@ -18,7 +19,8 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
         initComponents();
     }
 
-            ConsultaUsuarios acc = new ConsultaUsuarios();
+     conectar conn = new conectar();
+     Queries_Usuarios consultas = new Queries_Usuarios();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,14 +32,14 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        txtEmpleado = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtContra = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        cboTipo = new javax.swing.JComboBox<>();
+        cboRol = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -46,6 +48,8 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
         jButton7 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -59,14 +63,14 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
-        jLabel2.setText("Usuario");
+        jLabel2.setText("ID Empledo");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 20));
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 180, -1));
+        getContentPane().add(txtEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 180, -1));
 
         jLabel3.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
         jLabel3.setText("Rol");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 90, -1));
-        getContentPane().add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 180, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 90, -1));
+        getContentPane().add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 180, -1));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -90,7 +94,7 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
         jLabel4.setText("Contraseña");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 90, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 90, -1));
 
         jButton4.setBackground(new java.awt.Color(0, 0, 102));
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
@@ -102,8 +106,8 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 130, -1));
 
-        cboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "Administrador", "Usuario" }));
-        getContentPane().add(cboTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 180, -1));
+        cboRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "Administrador", "Empleado" }));
+        getContentPane().add(cboRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 180, -1));
 
         tblDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -168,6 +172,11 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
+        jLabel5.setText("Usuario");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 20));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 180, -1));
+
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menu.jpg"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 370));
 
@@ -175,27 +184,42 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try{
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            String db="jdbc:ucanaccess://"+"C:/proyecto/VentaRepuestos.accdb";
-            Connection cn=DriverManager.getConnection(db, "", "");
-            Statement s=cn.createStatement();
-
-            String nom_usu=txtNombre.getText();
-            String contra_usu=txtContra.getText();
-            String tipo=cboTipo.getSelectedItem().toString();
-            s.execute("insert into Usuarios values('"+nom_usu+"','"+contra_usu+"','"+tipo+"')");
-            JOptionPane.showMessageDialog(rootPane, "Datos Guardados");
-
-            acc.Buscar(tblDatos);
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane,"El error es "+ex);
-        }
+        guardar();
+        JOptionPane.showMessageDialog(rootPane, "Datos Guardados");
+        consultas.buscar(tblDatos);
+        limpiar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        txtNombre.setText(null);
+    private void guardar(){
+        //trato de acceder a la BD para luego hacer una query de insert
+        try{
+            conn.conexion();
+            Statement query = conn.conexion().createStatement();
+            
+            String empleado = this.txtEmpleado.getText();
+            String usuario = this.txtUsuario.getText();
+            String contra = this.txtContra.getText();
+            String rol = this.cboRol.getSelectedItem().toString();
+            
+            //Inserta los valores a la tabla
+            
+            query.execute("INSERT INTO usuario VALUES('"+empleado+"','"+usuario+"','"+contra+"','"+
+                    rol+"');");
+                                
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane,"El error es: "+e);
+        }
+    }
+    
+    public void limpiar(){
+        txtEmpleado.setText(null);
+        txtUsuario.setText(null);
         txtContra.setText(null);
+        cboRol.setSelectedIndex(0);
+    }
+    
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        limpiar();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -205,30 +229,37 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        acc.Buscar(tblDatos);
+        consultas.buscar(tblDatos);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        int fila = tblDatos.getSelectedRow();
-        if (fila >= 0){
-
-            String codigo = String.valueOf(tblDatos.getValueAt(fila, 0));
-            acc.deletePersona(codigo);
-            acc.Buscar(tblDatos);
+        //Metodo para eliminar los registros seleccionados de la tabla [tblDatos]
+        int resp=JOptionPane.showConfirmDialog(this,"¿Desea Eliminar este Registro?","Eliminar",JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE);
+        if(resp==0){
+            //Si la respuesta es "Si", este procede a eliminar dicho registro
+            int fila = tblDatos.getSelectedRow();
+            if (fila >= 0){
+                String codigo = String.valueOf(tblDatos.getValueAt(fila, 0));
+                consultas.eliminar(codigo);
+                if (consultas.eliminar(codigo)){
+                    consultas.buscar(tblDatos);
+                    JOptionPane.showMessageDialog(rootPane, "Registro Eliminado");
+                }                         
+            }
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
 
+         // Este selecciona la fila deseada para modificar y a su vez, pone los valores del registro en su respectivo campo
         int FilaSelec =  tblDatos.getSelectedRow();
         if (FilaSelec>=0){
-            txtNombre.setText(tblDatos.getValueAt(FilaSelec, 0).toString());
-            txtContra.setText(tblDatos.getValueAt(FilaSelec, 1).toString());
-            
-            String codigo = String.valueOf(tblDatos.getValueAt(FilaSelec, 0));
-            acc.deletePersona(codigo);
-            acc.Buscar(tblDatos);
+
+            txtEmpleado.setText(tblDatos.getValueAt(FilaSelec, 1).toString());
+            txtUsuario.setText(tblDatos.getValueAt(FilaSelec, 2).toString());
+            txtContra.setText(tblDatos.getValueAt(FilaSelec, 3).toString());
+            cboRol.setSelectedItem(tblDatos.getValueAt(FilaSelec, 4).toString());
             
         }else{
             JOptionPane.showMessageDialog(this,"Fila NO Seleccionada","Row Defaul Error",JOptionPane.INFORMATION_MESSAGE);
@@ -236,24 +267,14 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        try{
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            String db="jdbc:ucanaccess://"+"C:/proyecto/VentaRepuestos.accdb";
-            Connection cn=DriverManager.getConnection(db, "", "");
-            Statement s=cn.createStatement();
-
-            String nom_usu=txtNombre.getText();
-            String contra_usu=txtContra.getText();
-            String tipo=cboTipo.getSelectedItem().toString();
-            s.execute("insert into Usuarios values('"+nom_usu+"','"+contra_usu+"','"+tipo+"')");
-            JOptionPane.showMessageDialog(rootPane, "Datos Modificados Correctamente");
-
-            acc.Buscar(tblDatos);
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane,"El error es "+ex);
-        }
-        txtNombre.setText(null);
-        txtContra.setText(null);
+        //Boton para hacer la confirmacion de los datos modificados y a la vez los inserta en la tabla
+            int FilaSelec =  tblDatos.getSelectedRow();
+            String codigo = String.valueOf(tblDatos.getValueAt(FilaSelec, 0));
+            consultas.modificar(codigo,txtEmpleado.getText(),txtUsuario.getText(),txtContra.getText(),cboRol.getSelectedItem().toString());
+            JOptionPane.showMessageDialog(rootPane, "Datos Modificados");
+            //Cuando modifica los datos, los campos se limpian
+            limpiar();
+            consultas.buscar(tblDatos); 
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -271,7 +292,7 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cboTipo;
+    private javax.swing.JComboBox<String> cboRol;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -285,10 +306,12 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTextField txtContra;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtEmpleado;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

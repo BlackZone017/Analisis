@@ -7,7 +7,9 @@ package proyecto.Mantenimiento;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
-import Clases.ConsultaArticulos;
+import Clases.Queries_Facturas;
+import Clases.Queries_Productos;
+import Clases.conectar;
 
 public class frmProducto extends javax.swing.JInternalFrame {
 
@@ -18,7 +20,8 @@ public class frmProducto extends javax.swing.JInternalFrame {
         initComponents();
     }
 
-    ConsultaArticulos acc = new ConsultaArticulos();
+    conectar conn = new conectar();
+     Queries_Productos consultas = new Queries_Productos();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,7 +33,7 @@ public class frmProducto extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        txtCosto = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -46,11 +49,9 @@ public class frmProducto extends javax.swing.JInternalFrame {
         jButton7 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtFecha = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDescrip = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -63,13 +64,13 @@ public class frmProducto extends javax.swing.JInternalFrame {
         jLabel1.setText("PRODUCTOS");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 240, 30));
 
-        txtNombre.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtNombre.setBorder(null);
+        txtNombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtNombre.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 180, 20));
 
-        txtCosto.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtCosto.setBorder(null);
-        getContentPane().add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 180, 20));
+        txtPrecio.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPrecio.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 180, 20));
 
         jLabel3.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
         jLabel3.setText("Nombre-Producto");
@@ -77,7 +78,7 @@ public class frmProducto extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
         jLabel4.setText("Precio Unitario");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 120, 20));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 120, 20));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -174,23 +175,18 @@ public class frmProducto extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
         jLabel2.setText("Cantidad");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
-        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 180, -1));
-
-        jLabel5.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
-        jLabel5.setText("Nombre");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 70, 20));
-        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 250, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 180, -1));
 
         jLabel6.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
         jLabel6.setText("Descripcion");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 90, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txtDescrip.setColumns(20);
+        txtDescrip.setRows(5);
+        jScrollPane2.setViewportView(txtDescrip);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 230, 90));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 230, 80));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menu.jpg"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 460));
@@ -199,25 +195,42 @@ public class frmProducto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try{
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            String db="jdbc:ucanaccess://"+"C:/proyecto/VentaRepuestos.accdb";
-            Connection cn=DriverManager.getConnection(db, "", "");
-            Statement s=cn.createStatement();
-
-            String nom_articulo=txtNombre.getText();
-            String Costo=txtCosto.getText();
-            s.execute("insert into Articulos values('"+nom_articulo+"','"+Costo+"')");
-            JOptionPane.showMessageDialog(rootPane, "Datos Guardados");
-
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane,"El error es "+ex);
-        }
+        guardar();
+        JOptionPane.showMessageDialog(rootPane, "Datos Guardados");
+        consultas.buscar(tblDatos);
+        limpiar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        txtCosto.setText(null);
+    private void guardar(){
+        //trato de acceder a la BD para luego hacer una query de insert
+        try{
+            conn.conexion();
+            Statement query = conn.conexion().createStatement();
+            
+            String nombre = this.txtNombre.getText();
+            String precio = this.txtPrecio.getText();
+            String descripcion = this.txtDescrip.getText();
+            String cantidad = this.txtCantidad.getText();
+            
+            //Inserta los valores a la tabla
+            
+            query.execute("INSERT INTO producto VALUES('"+nombre+"','"+precio+"','"+descripcion+"','"+
+                    cantidad+"');");
+                                
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane,"El error es: "+e);
+        }
+    }
+    
+    public void limpiar(){
         txtNombre.setText(null);
+        txtDescrip.setText(null);
+        txtPrecio.setText(null);
+        txtCantidad.setText(null); 
+    }
+    
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        limpiar();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -227,8 +240,7 @@ public class frmProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        acc.Buscar(tblDatos);
+        consultas.buscar(tblDatos);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -238,48 +250,48 @@ public class frmProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        int fila = tblDatos.getSelectedRow();
-        if (fila >= 0){
-
-            String codigo = String.valueOf(tblDatos.getValueAt(fila, 0));
-            acc.deletePersona(codigo);
-            acc.Buscar(tblDatos);
+        //Metodo para eliminar los registros seleccionados de la tabla [tblDatos]
+        int resp=JOptionPane.showConfirmDialog(this,"¿Desea Eliminar este Registro?","Eliminar",JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE);
+        if(resp==0){
+            //Si la respuesta es "Si", este procede a eliminar dicho registro
+            int fila = tblDatos.getSelectedRow();
+            if (fila >= 0){
+                String codigo = String.valueOf(tblDatos.getValueAt(fila, 0));
+                consultas.eliminar(codigo);
+                if (consultas.eliminar(codigo)){
+                    consultas.buscar(tblDatos);
+                    JOptionPane.showMessageDialog(rootPane, "Registro Eliminado");
+                }                         
+            }
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
 
+        // Este selecciona la fila deseada para modificar y a su vez, pone los valores del registro en su respectivo campo
         int FilaSelec =  tblDatos.getSelectedRow();
         if (FilaSelec>=0){
+
             txtNombre.setText(tblDatos.getValueAt(FilaSelec, 1).toString());
-            txtCosto.setText(tblDatos.getValueAt(FilaSelec, 2).toString());
+            txtPrecio.setText(tblDatos.getValueAt(FilaSelec, 2).toString());
+            txtDescrip.setText(tblDatos.getValueAt(FilaSelec, 3).toString());
+            txtCantidad.setText(tblDatos.getValueAt(FilaSelec, 4).toString());
             
-            String codigo = String.valueOf(tblDatos.getValueAt(FilaSelec, 0));
-            acc.deletePersona(codigo);
-            acc.Buscar(tblDatos);
         }else{
             JOptionPane.showMessageDialog(this,"Fila NO Seleccionada","Row Defaul Error",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        try{
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            String db="jdbc:ucanaccess://"+"C:/proyecto/VentaRepuestos.accdb";
-            Connection cn=DriverManager.getConnection(db, "", "");
-            Statement s=cn.createStatement();
-            String nom_articulo=txtNombre.getText();
-            String Costo=txtCosto.getText();
-            s.execute("insert into Articulos values('"+nom_articulo+"','"+Costo+"')");
-            JOptionPane.showMessageDialog(rootPane, "Datos Modificados Correctamente");
-            
-            acc.Buscar(tblDatos);
-        txtCosto.setText(null);
-        txtNombre.setText(null);
-
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane,"El error es "+ex);
-        }
+        //Boton para hacer la confirmacion de los datos modificados y a la vez los inserta en la tabla
+            int FilaSelec =  tblDatos.getSelectedRow();
+            String codigo = String.valueOf(tblDatos.getValueAt(FilaSelec, 0));
+            consultas.modificar(codigo,txtNombre.getText(),txtPrecio.getText(),txtDescrip.getText(),txtCantidad.getText());
+            JOptionPane.showMessageDialog(rootPane, "Datos Modificados");
+            //Cuando modifica los datos, los campos se limpian
+            limpiar();
+            consultas.buscar(tblDatos); 
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -304,16 +316,14 @@ public class frmProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTextField txtCantidad;
-    private javax.swing.JTextField txtCosto;
-    private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextArea txtDescrip;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

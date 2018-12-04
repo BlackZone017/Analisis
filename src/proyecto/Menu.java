@@ -11,6 +11,7 @@ import proyecto.Mantenimiento.frmFacturas;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+import proyecto.Informes_y_usuarios.frmUsuarios;
 
 
 public class Menu extends javax.swing.JFrame {
@@ -72,6 +73,7 @@ public class Menu extends javax.swing.JFrame {
         mnuUsuario = new javax.swing.JMenu();
         mnuAgregarUsuarios = new javax.swing.JMenuItem();
         mnuAyuda = new javax.swing.JMenu();
+        mnuAgregarUsuarios1 = new javax.swing.JMenuItem();
         mnuCerrar = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
@@ -247,6 +249,16 @@ public class Menu extends javax.swing.JFrame {
 
         mnuAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/informacion.png"))); // NOI18N
         mnuAyuda.setText("Ayuda");
+
+        mnuAgregarUsuarios1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/informacion.png"))); // NOI18N
+        mnuAgregarUsuarios1.setText("Ayuda");
+        mnuAgregarUsuarios1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAgregarUsuarios1ActionPerformed(evt);
+            }
+        });
+        mnuAyuda.add(mnuAgregarUsuarios1);
+
         jMenuBar1.add(mnuAyuda);
 
         mnuCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/anterior.png"))); // NOI18N
@@ -310,7 +322,17 @@ public class Menu extends javax.swing.JFrame {
 
     private void mnuAgregarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarUsuariosActionPerformed
         // TODO add your handling code here:
+        frmUsuarios abrir=new frmUsuarios();
+        this.escritorio.add(abrir);
+        abrir.show(true);
     }//GEN-LAST:event_mnuAgregarUsuariosActionPerformed
+
+    private void mnuAgregarUsuarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarUsuarios1ActionPerformed
+        // TODO add your handling code here:
+        frmAyuda abrir=new frmAyuda();
+        this.escritorio.add(abrir);
+        abrir.show(true);
+    }//GEN-LAST:event_mnuAgregarUsuarios1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -358,6 +380,7 @@ public class Menu extends javax.swing.JFrame {
     javax.swing.JMenuItem mnuAgregarEmpleados;
     javax.swing.JMenuItem mnuAgregarFacturas;
     javax.swing.JMenuItem mnuAgregarUsuarios;
+    javax.swing.JMenuItem mnuAgregarUsuarios1;
     javax.swing.JMenu mnuArticulos;
     javax.swing.JMenu mnuAyuda;
     javax.swing.JMenu mnuCerrar;

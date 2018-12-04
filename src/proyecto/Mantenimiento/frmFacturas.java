@@ -55,6 +55,8 @@ public class frmFacturas extends javax.swing.JInternalFrame {
         jButton8 = new javax.swing.JButton();
         txtCantidad = new javax.swing.JTextField();
         txtTipoPago = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtFecha = new datechooser.beans.DateChooserCombo();
         jLabel9 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -71,8 +73,8 @@ public class frmFacturas extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 110, -1));
 
         jLabel5.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
-        jLabel5.setText("ID-Producto");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
+        jLabel5.setText("Fecha");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, 20));
 
         jLabel6.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
         jLabel6.setText("Cantidad");
@@ -97,7 +99,7 @@ public class frmFacturas extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 150, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 150, -1));
 
         jButton3.setBackground(new java.awt.Color(0, 0, 102));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
@@ -107,7 +109,7 @@ public class frmFacturas extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 150, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 150, -1));
 
         jButton4.setBackground(new java.awt.Color(0, 0, 102));
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
@@ -117,7 +119,7 @@ public class frmFacturas extends javax.swing.JInternalFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 150, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 150, -1));
 
         txtCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtCliente.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -141,7 +143,7 @@ public class frmFacturas extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tblDatos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 620, 120));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 640, 120));
 
         jButton1.setBackground(new java.awt.Color(0, 0, 153));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -152,7 +154,7 @@ public class frmFacturas extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 170, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 150, -1));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 102));
@@ -165,7 +167,7 @@ public class frmFacturas extends javax.swing.JInternalFrame {
                 jButton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, -1, -1));
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, -1, -1));
 
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/modify.png"))); // NOI18N
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +175,7 @@ public class frmFacturas extends javax.swing.JInternalFrame {
                 jButton11ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, -1, -1));
+        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 430, -1, -1));
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Save_37110.png"))); // NOI18N
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -181,7 +183,7 @@ public class frmFacturas extends javax.swing.JInternalFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 400, -1, -1));
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, -1, -1));
 
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/anterior.png"))); // NOI18N
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +191,7 @@ public class frmFacturas extends javax.swing.JInternalFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, -1, -1));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 430, -1, -1));
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/next.png"))); // NOI18N
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -197,7 +199,7 @@ public class frmFacturas extends javax.swing.JInternalFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, -1, -1));
 
         txtCantidad.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 140, -1));
@@ -205,8 +207,13 @@ public class frmFacturas extends javax.swing.JInternalFrame {
         txtTipoPago.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         getContentPane().add(txtTipoPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 140, -1));
 
+        jLabel8.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
+        jLabel8.setText("ID-Producto");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
+        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 140, -1));
+
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menu.jpg"))); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 450));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -230,11 +237,11 @@ public class frmFacturas extends javax.swing.JInternalFrame {
             String precio = this.txtPrecio.getText();
             String cantidad = this.txtCantidad.getText(); 
             String tipoPago = this.txtTipoPago.getText();
-            
+            String fecha = this.txtFecha.getText();
             //Inserta los valores a la tabla
             
             query.execute("INSERT INTO factura VALUES('"+idCliente+"','"+idEmpleado+"','"+idProducto+"','"+
-                    cantidad+"','"+precio+"','"+tipoPago+"');");
+                    cantidad+"','"+precio+"','"+tipoPago+"','"+fecha+"');");
                                 
         }catch(Exception e){
             JOptionPane.showMessageDialog(rootPane,"El error es: "+e);
@@ -248,7 +255,7 @@ public class frmFacturas extends javax.swing.JInternalFrame {
         txtPrecio.setText(null);
         txtCantidad.setText(null); 
         txtTipoPago.setText(null);
-        
+        txtFecha.setText(null);
     }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -295,6 +302,7 @@ public class frmFacturas extends javax.swing.JInternalFrame {
             txtPrecio.setText(tblDatos.getValueAt(FilaSelec, 5).toString());
             txtCantidad.setText(tblDatos.getValueAt(FilaSelec, 4).toString());
             txtTipoPago.setText(tblDatos.getValueAt(FilaSelec, 6).toString());
+            txtFecha.setText(tblDatos.getValueAt(FilaSelec, 7).toString());
         }else{
             JOptionPane.showMessageDialog(this,"Fila NO Seleccionada","Row Defaul Error",JOptionPane.INFORMATION_MESSAGE);
         }
@@ -304,8 +312,8 @@ public class frmFacturas extends javax.swing.JInternalFrame {
         //Boton para hacer la confirmacion de los datos modificados y a la vez los inserta en la tabla
             int FilaSelec =  tblDatos.getSelectedRow();
             String codigo = String.valueOf(tblDatos.getValueAt(FilaSelec, 0));
-            consultas.modificar(codigo,txtCliente.getText(),txtEmpleado.getText(),txtProducto.getText(),txtPrecio.getText(),
-                        txtCantidad.getText(),txtTipoPago.getText());
+            consultas.modificar(codigo,txtCliente.getText(),txtEmpleado.getText(),txtProducto.getText(),txtCantidad.getText(),
+                        txtPrecio.getText(),txtTipoPago.getText(),txtFecha.getText());
             JOptionPane.showMessageDialog(rootPane, "Datos Modificados");
             //Cuando modifica los datos, los campos se limpian
             limpiar();
@@ -343,12 +351,14 @@ public class frmFacturas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JFormattedTextField txtCliente;
     private javax.swing.JFormattedTextField txtEmpleado;
+    private datechooser.beans.DateChooserCombo txtFecha;
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JFormattedTextField txtProducto;
     private javax.swing.JTextField txtTipoPago;
