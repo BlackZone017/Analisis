@@ -6,9 +6,11 @@
 package proyecto;
 
 
+import Clases.conectar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
+import Clases.conectar;
 
 public class Splash extends javax.swing.JFrame {
 

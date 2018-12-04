@@ -5,8 +5,11 @@
  */
 package proyecto;
 
+import Clases.consultas;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import Clases.conectar;
+import Clases.consultas;
 /**
  *
  * @author Gouri
@@ -36,6 +39,7 @@ public class Log_in extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Ingresar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        cboTipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -85,7 +89,7 @@ public class Log_in extends javax.swing.JFrame {
                 IngresarActionPerformed(evt);
             }
         });
-        jPanel1.add(Ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, 160, 30));
+        jPanel1.add(Ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, 160, 30));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 153));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -98,15 +102,21 @@ public class Log_in extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 90, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 590));
+        cboTipo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:", "Administrador", "Empleado" }));
+        jPanel1.add(cboTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 180, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
-       this.dispose();
-       
+      int resp=JOptionPane.showConfirmDialog(this,"¿Desea Salir?","Salir",JOptionPane.YES_NO_OPTION,
+               JOptionPane.QUESTION_MESSAGE);
+       if(resp==0){
+           this.dispose();
+       }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtusuFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtusuFocusGained
@@ -118,92 +128,40 @@ public class Log_in extends javax.swing.JFrame {
     }//GEN-LAST:event_txtusuActionPerformed
 
     private void IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarActionPerformed
-        //Sconsultas acc = new consultas();
-        
         consultas con = new consultas();
         
         //Condicion para evaluar si las credenciales son correctas mediante el metodo [verificar]
-        if(con.verificar(txtusu.getText(), txtContra.getText())){
+        if(con.verificar(txtusu.getText(), txtContra.getText(), cboTipo.getSelectedItem().toString())){
             
-            JOptionPane.showMessageDialog(rootPane,"Has Ingresado al Sistema como "+txtusu.getText(),
+            JOptionPane.showMessageDialog(rootPane,"Has Ingresado al Sistema como "+this.cboTipo.getSelectedItem().toString(),
                      "Bienvenido...",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
+            Menu menu = new Menu();
+            
+            if("Administrador".equals(cboTipo.getSelectedItem().toString())){
+                menu.Admin();
+                menu.setVisible(true);
+                this.dispose();
+             }else if("Empleado".equals(cboTipo.getSelectedItem().toString())){
+                menu.Empleado();
+                menu.setVisible(true);
+                this.dispose();
+             }
             
         }else{
             JOptionPane.showMessageDialog(rootPane, "No se pudo acceder al Sistema \nUsuario, Contraseña o Perfil Incorrecto(a)","Sistema",JOptionPane.WARNING_MESSAGE);
              cont ++;
         }
         
-        //Si se trata de logear [mal] 5 veces seguidas, se cierra el programa
-        if(cont==5){
+        //Si se trata de loguear [mal] 3 veces seguidas, se cierra el programa
+        if(cont==3){
             JOptionPane.showMessageDialog(rootPane,"Ha sobrepasado el Limite de Entrada","Limite Excedido",JOptionPane.ERROR_MESSAGE);
              System.exit(0);
         }
-        
-//         if (acc.verificar(this.txtusu.getText(),this.txtContra.getText())){
-//             
-//             JOptionPane.showMessageDialog(rootPane,"Has Ingresado al Sistema como ",
-//                     "Welcome",JOptionPane.INFORMATION_MESSAGE);
-//             
-//             
-//             Menu abrir= new Menu();
-//            
-//             if("Administrador".equals(cboUsuario.getSelectedItem().toString())){
-//                abrir.Admin();
-//                abrir.setVisible(true);
-//                this.dispose();
-//             }else if("Empleado".equals(cboUsuario.getSelectedItem().toString())){
-//                abrir.Empleado();
-//                abrir.setVisible(true);
-//                this.dispose();
-//             }else if("Cliente".equals(cboUsuario.getSelectedItem().toString())){
-//                abrir.Cliente();
-//                abrir.setVisible(true);
-//                this.dispose(); 
-//             }
-//                              
-//         }else{
-//             JOptionPane.showMessageDialog(rootPane, "No se pudo acceder al Sistema \nUsuario o Contraseña Incorrecta","Sistema",JOptionPane.WARNING_MESSAGE);
-//             cont ++;
-//         }
-//         if(cont==3){
-//             JOptionPane.showMessageDialog(rootPane,"Ha sobrepasado el Limite de Entrada","Limite Excedido",JOptionPane.ERROR_MESSAGE);
-//             System.exit(0);
-        // }
     }//GEN-LAST:event_IngresarActionPerformed
 
     private void txtContraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraKeyPressed
-       /* consultas acc = new consultas();
-         if (acc.verificar(this.txtusu.getText(),this.txtContra.getText(),this.cboUsuario.getSelectedItem().toString())){
-             
-             JOptionPane.showMessageDialog(rootPane,"Has Ingresado al Sistema como "+this.cboUsuario.getSelectedItem().toString(),
-                     "Welcome",JOptionPane.INFORMATION_MESSAGE);
-             
-             
-             Menu abrir= new Menu();
-            
-             if ("Administrador".equals(cboUsuario.getSelectedItem().toString())){
-                abrir.Admin();
-                abrir.setVisible(true);
-                this.dispose();
-             }else if("Empleado".equals(cboUsuario.getSelectedItem().toString())){
-                abrir.Empleado();
-                abrir.setVisible(true);
-                this.dispose();
-             }else if("Cliente".equals(cboUsuario.getSelectedItem().toString())){
-                 abrir.Cliente();
-                abrir.setVisible(true);
-                this.dispose(); 
-             }
-                              
-         }else{
-             JOptionPane.showMessageDialog(rootPane, "No se pudo acceder al Sistema \nUsuario o Contraseña Incorrecta","Sistema",JOptionPane.WARNING_MESSAGE);
-             cont ++;
-         }
-         if(cont==3){
-             JOptionPane.showMessageDialog(rootPane,"Ha sobrepasado el Limite de Entrada","Limite Excedido",JOptionPane.ERROR_MESSAGE);
-             System.exit(0);
-         }    */
+       
     }//GEN-LAST:event_txtContraKeyPressed
 
     /**
@@ -243,6 +201,7 @@ public class Log_in extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Ingresar;
+    private javax.swing.JComboBox<String> cboTipo;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -23,40 +23,26 @@ public class Menu extends javax.swing.JFrame {
         
     }
 
-    public void Admin(){
-        mnuClientes.setEnabled(true);
-        mnuEmpleados.setEnabled(true);
-        mnuUsuario.setEnabled(true);
-        mnuFacturas.setEnabled(true);
-        mnuInventario.setEnabled(true);
-        mnuArticulos.setEnabled(true);
-        mnuServicios.setEnabled(true);
-        mnuEmpresa.setEnabled(true);
-        mnuSucursales.setEnabled(true);
-    }
+//    public void Admin(){
+//        mnuClientes.setEnabled(true);
+//        mnuEmpleados.setEnabled(true);
+//        mnuUsuario.setEnabled(true);
+//        mnuFacturas.setEnabled(true);
+//        mnuInventario.setEnabled(true);
+//        mnuArticulos.setEnabled(true);
+//        mnuReportes.setEnabled(true);
+//        mnuAyuda.setEnabled(true);
+//        mnuCerrar.setEnabled(true);
+//    }
     public void Empleado(){
-        mnuClientes.setEnabled(true);
-        mnuEmpleados.setEnabled(false);
-        mnuUsuario.setEnabled(false);
-        mnuFacturas.setEnabled(true);
-        mnuInventario.setEnabled(false);
-        mnuArticulos.setEnabled(true);
-        mnuServicios.setEnabled(true);
-        mnuEmpresa.setEnabled(false);
-        mnuSucursales.setEnabled(true);
+        mnuMantenimiento.setVisible(false);
+        mnuUsuario.setVisible(false);
+    }
+    
+    public void Admin(){
+        
     }
     frmClientes abrir = new frmClientes();
-    public void Cliente(){
-        mnuClientes.setEnabled(true);
-        mnuEmpleados.setEnabled(false);
-        mnuUsuario.setEnabled(false);
-        mnuFacturas.setEnabled(false);
-        mnuInventario.setEnabled(false);
-        mnuArticulos.setEnabled(false);
-        mnuServicios.setEnabled(false);
-        mnuEmpresa.setEnabled(false);
-        mnuSucursales.setEnabled(true);
-    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -67,7 +53,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        mnuSucursales1 = new javax.swing.JMenu();
+        mnuMantenimiento = new javax.swing.JMenu();
         mnuClientes = new javax.swing.JMenu();
         mnuAgregarClientes = new javax.swing.JMenuItem();
         mnuEmpleados = new javax.swing.JMenu();
@@ -77,19 +63,19 @@ public class Menu extends javax.swing.JFrame {
         mnuInventario = new javax.swing.JMenu();
         mnuInventarizar = new javax.swing.JMenuItem();
         mnuArticulos = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        mnuFacturas1 = new javax.swing.JMenu();
-        mnuAgregarFacturas2 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        mnuAgregarFacturas4 = new javax.swing.JMenuItem();
-        mnuInventarizar2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        mnuServicios = new javax.swing.JMenu();
-        mnuAgregarServicios = new javax.swing.JMenuItem();
+        menuAgregarProductos = new javax.swing.JMenuItem();
+        mnuConsultas = new javax.swing.JMenu();
+        mnuConsultaClientes = new javax.swing.JMenuItem();
+        mnuConsultaEmpleados = new javax.swing.JMenuItem();
+        mnuConsultaFacturas = new javax.swing.JMenuItem();
+        mnuConsultaInventario = new javax.swing.JMenuItem();
+        mnuConsultarProductos = new javax.swing.JMenuItem();
+        mnuReportes = new javax.swing.JMenu();
+        mnuVerReportes = new javax.swing.JMenuItem();
         mnuUsuario = new javax.swing.JMenu();
-        mnuAgregarUsuarios1 = new javax.swing.JMenuItem();
-        mnuEmpresa = new javax.swing.JMenu();
-        mnuSucursales = new javax.swing.JMenu();
+        mnuAgregarUsuarios = new javax.swing.JMenuItem();
+        mnuAyuda = new javax.swing.JMenu();
+        mnuCerrar = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
@@ -115,8 +101,8 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 0, 102)), null));
         jMenuBar1.setForeground(java.awt.SystemColor.activeCaption);
 
-        mnuSucursales1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo personal.png"))); // NOI18N
-        mnuSucursales1.setText("Mantenimiento");
+        mnuMantenimiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo personal.png"))); // NOI18N
+        mnuMantenimiento.setText("Mantenimiento");
 
         mnuClientes.setBackground(new java.awt.Color(255, 255, 255));
         mnuClientes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -132,7 +118,7 @@ public class Menu extends javax.swing.JFrame {
         });
         mnuClientes.add(mnuAgregarClientes);
 
-        mnuSucursales1.add(mnuClientes);
+        mnuMantenimiento.add(mnuClientes);
 
         mnuEmpleados.setBackground(new java.awt.Color(255, 255, 255));
         mnuEmpleados.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -148,7 +134,7 @@ public class Menu extends javax.swing.JFrame {
         });
         mnuEmpleados.add(mnuAgregarEmpleados);
 
-        mnuSucursales1.add(mnuEmpleados);
+        mnuMantenimiento.add(mnuEmpleados);
 
         mnuFacturas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/buscar factura.png"))); // NOI18N
         mnuFacturas.setText("Facturas");
@@ -162,7 +148,7 @@ public class Menu extends javax.swing.JFrame {
         });
         mnuFacturas.add(mnuAgregarFacturas);
 
-        mnuSucursales1.add(mnuFacturas);
+        mnuMantenimiento.add(mnuFacturas);
 
         mnuInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/inventario2.png"))); // NOI18N
         mnuInventario.setText("Inventario ");
@@ -176,113 +162,113 @@ public class Menu extends javax.swing.JFrame {
         });
         mnuInventario.add(mnuInventarizar);
 
-        mnuSucursales1.add(mnuInventario);
+        mnuMantenimiento.add(mnuInventario);
 
         mnuArticulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/articulo.png"))); // NOI18N
         mnuArticulos.setText("Productos");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/articulo+.png"))); // NOI18N
-        jMenuItem1.setText("Productos");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuAgregarProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/articulo+.png"))); // NOI18N
+        menuAgregarProductos.setText("Productos");
+        menuAgregarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuAgregarProductosActionPerformed(evt);
             }
         });
-        mnuArticulos.add(jMenuItem1);
+        mnuArticulos.add(menuAgregarProductos);
 
-        mnuSucursales1.add(mnuArticulos);
+        mnuMantenimiento.add(mnuArticulos);
 
-        jMenuBar1.add(mnuSucursales1);
+        jMenuBar1.add(mnuMantenimiento);
 
-        mnuFacturas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/buscar factura.png"))); // NOI18N
-        mnuFacturas1.setText("Consulltas");
+        mnuConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/buscar factura.png"))); // NOI18N
+        mnuConsultas.setText("Consulltas");
 
-        mnuAgregarFacturas2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cliente.png"))); // NOI18N
-        mnuAgregarFacturas2.setText("Clientes");
-        mnuAgregarFacturas2.addActionListener(new java.awt.event.ActionListener() {
+        mnuConsultaClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cliente.png"))); // NOI18N
+        mnuConsultaClientes.setText("Clientes");
+        mnuConsultaClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuAgregarFacturas2ActionPerformed(evt);
+                mnuConsultaClientesActionPerformed(evt);
             }
         });
-        mnuFacturas1.add(mnuAgregarFacturas2);
+        mnuConsultas.add(mnuConsultaClientes);
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/empleadoIcono.png"))); // NOI18N
-        jMenuItem2.setText("Empleados");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        mnuConsultaEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/empleadoIcono.png"))); // NOI18N
+        mnuConsultaEmpleados.setText("Empleados");
+        mnuConsultaEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                mnuConsultaEmpleadosActionPerformed(evt);
             }
         });
-        mnuFacturas1.add(jMenuItem2);
+        mnuConsultas.add(mnuConsultaEmpleados);
 
-        mnuAgregarFacturas4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fctra.png"))); // NOI18N
-        mnuAgregarFacturas4.setText("Detalle Facturas");
-        mnuAgregarFacturas4.addActionListener(new java.awt.event.ActionListener() {
+        mnuConsultaFacturas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fctra.png"))); // NOI18N
+        mnuConsultaFacturas.setText("Detalle Facturas");
+        mnuConsultaFacturas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuAgregarFacturas4ActionPerformed(evt);
+                mnuConsultaFacturasActionPerformed(evt);
             }
         });
-        mnuFacturas1.add(mnuAgregarFacturas4);
+        mnuConsultas.add(mnuConsultaFacturas);
 
-        mnuInventarizar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/inventario1.png"))); // NOI18N
-        mnuInventarizar2.setText("Inventario");
-        mnuInventarizar2.addActionListener(new java.awt.event.ActionListener() {
+        mnuConsultaInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/inventario1.png"))); // NOI18N
+        mnuConsultaInventario.setText("Inventario");
+        mnuConsultaInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuInventarizar2ActionPerformed(evt);
+                mnuConsultaInventarioActionPerformed(evt);
             }
         });
-        mnuFacturas1.add(mnuInventarizar2);
+        mnuConsultas.add(mnuConsultaInventario);
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/articulo+.png"))); // NOI18N
-        jMenuItem3.setText("Productos");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        mnuConsultarProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/articulo+.png"))); // NOI18N
+        mnuConsultarProductos.setText("Productos");
+        mnuConsultarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                mnuConsultarProductosActionPerformed(evt);
             }
         });
-        mnuFacturas1.add(jMenuItem3);
+        mnuConsultas.add(mnuConsultarProductos);
 
-        jMenuBar1.add(mnuFacturas1);
+        jMenuBar1.add(mnuConsultas);
 
-        mnuServicios.setBackground(new java.awt.Color(255, 255, 255));
-        mnuServicios.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuServicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/factura.png"))); // NOI18N
-        mnuServicios.setText("Reportes");
+        mnuReportes.setBackground(new java.awt.Color(255, 255, 255));
+        mnuReportes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mnuReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/factura.png"))); // NOI18N
+        mnuReportes.setText("Reportes");
 
-        mnuAgregarServicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/buscar factura.png"))); // NOI18N
-        mnuAgregarServicios.setText("Reportes");
-        mnuAgregarServicios.addActionListener(new java.awt.event.ActionListener() {
+        mnuVerReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/buscar factura.png"))); // NOI18N
+        mnuVerReportes.setText("Reportes");
+        mnuVerReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuAgregarServiciosActionPerformed(evt);
+                mnuVerReportesActionPerformed(evt);
             }
         });
-        mnuServicios.add(mnuAgregarServicios);
+        mnuReportes.add(mnuVerReportes);
 
-        jMenuBar1.add(mnuServicios);
+        jMenuBar1.add(mnuReportes);
 
         mnuUsuario.setBackground(new java.awt.Color(255, 255, 255));
         mnuUsuario.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         mnuUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/usuarioIcono.png"))); // NOI18N
         mnuUsuario.setText("Configurar");
 
-        mnuAgregarUsuarios1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo personal.png"))); // NOI18N
-        mnuAgregarUsuarios1.setText("Usuarios");
-        mnuAgregarUsuarios1.addActionListener(new java.awt.event.ActionListener() {
+        mnuAgregarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo personal.png"))); // NOI18N
+        mnuAgregarUsuarios.setText("Usuarios");
+        mnuAgregarUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuAgregarUsuarios1ActionPerformed(evt);
+                mnuAgregarUsuariosActionPerformed(evt);
             }
         });
-        mnuUsuario.add(mnuAgregarUsuarios1);
+        mnuUsuario.add(mnuAgregarUsuarios);
 
         jMenuBar1.add(mnuUsuario);
 
-        mnuEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/informacion.png"))); // NOI18N
-        mnuEmpresa.setText("Ayuda");
-        jMenuBar1.add(mnuEmpresa);
+        mnuAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/informacion.png"))); // NOI18N
+        mnuAyuda.setText("Ayuda");
+        jMenuBar1.add(mnuAyuda);
 
-        mnuSucursales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/anterior.png"))); // NOI18N
-        mnuSucursales.setText("Cerrar Sesion ");
-        jMenuBar1.add(mnuSucursales);
+        mnuCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/anterior.png"))); // NOI18N
+        mnuCerrar.setText("Cerrar Sesion ");
+        jMenuBar1.add(mnuCerrar);
 
         setJMenuBar(jMenuBar1);
 
@@ -301,11 +287,11 @@ public class Menu extends javax.swing.JFrame {
         abrir.show(true);
     }//GEN-LAST:event_mnuAgregarEmpleadosActionPerformed
 
-    private void mnuAgregarServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarServiciosActionPerformed
+    private void mnuVerReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVerReportesActionPerformed
         //frmServicios abrir=new frmServicios();
         this.escritorio.add(abrir);
         abrir.show(true);
-    }//GEN-LAST:event_mnuAgregarServiciosActionPerformed
+    }//GEN-LAST:event_mnuVerReportesActionPerformed
 
     private void mnuInventarizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuInventarizarActionPerformed
        frmInventario abrir=new frmInventario();
@@ -319,35 +305,35 @@ public class Menu extends javax.swing.JFrame {
         abrir.show(true);
     }//GEN-LAST:event_mnuAgregarFacturasActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuAgregarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgregarProductosActionPerformed
         frmProducto abrir=new frmProducto();
         this.escritorio.add(abrir);
         abrir.show(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuAgregarProductosActionPerformed
 
-    private void mnuInventarizar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuInventarizar2ActionPerformed
+    private void mnuConsultaInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaInventarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_mnuInventarizar2ActionPerformed
+    }//GEN-LAST:event_mnuConsultaInventarioActionPerformed
 
-    private void mnuAgregarFacturas2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarFacturas2ActionPerformed
+    private void mnuConsultaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaClientesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_mnuAgregarFacturas2ActionPerformed
+    }//GEN-LAST:event_mnuConsultaClientesActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void mnuConsultaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaEmpleadosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_mnuConsultaEmpleadosActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void mnuConsultarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultarProductosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_mnuConsultarProductosActionPerformed
 
-    private void mnuAgregarFacturas4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarFacturas4ActionPerformed
+    private void mnuConsultaFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaFacturasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_mnuAgregarFacturas4ActionPerformed
+    }//GEN-LAST:event_mnuConsultaFacturasActionPerformed
 
-    private void mnuAgregarUsuarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarUsuarios1ActionPerformed
+    private void mnuAgregarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarUsuariosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_mnuAgregarUsuarios1ActionPerformed
+    }//GEN-LAST:event_mnuAgregarUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -390,28 +376,28 @@ public class Menu extends javax.swing.JFrame {
     javax.swing.JLabel jLabel4;
     javax.swing.JMenu jMenu1;
     javax.swing.JMenuBar jMenuBar1;
-    javax.swing.JMenuItem jMenuItem1;
-    javax.swing.JMenuItem jMenuItem2;
-    javax.swing.JMenuItem jMenuItem3;
+    javax.swing.JMenuItem menuAgregarProductos;
     javax.swing.JMenuItem mnuAgregarClientes;
     javax.swing.JMenuItem mnuAgregarEmpleados;
     javax.swing.JMenuItem mnuAgregarFacturas;
-    javax.swing.JMenuItem mnuAgregarFacturas2;
-    javax.swing.JMenuItem mnuAgregarFacturas4;
-    javax.swing.JMenuItem mnuAgregarServicios;
-    javax.swing.JMenuItem mnuAgregarUsuarios1;
+    javax.swing.JMenuItem mnuAgregarUsuarios;
     javax.swing.JMenu mnuArticulos;
+    javax.swing.JMenu mnuAyuda;
+    javax.swing.JMenu mnuCerrar;
     javax.swing.JMenu mnuClientes;
+    javax.swing.JMenuItem mnuConsultaClientes;
+    javax.swing.JMenuItem mnuConsultaEmpleados;
+    javax.swing.JMenuItem mnuConsultaFacturas;
+    javax.swing.JMenuItem mnuConsultaInventario;
+    javax.swing.JMenuItem mnuConsultarProductos;
+    javax.swing.JMenu mnuConsultas;
     javax.swing.JMenu mnuEmpleados;
-    javax.swing.JMenu mnuEmpresa;
     javax.swing.JMenu mnuFacturas;
-    javax.swing.JMenu mnuFacturas1;
     javax.swing.JMenu mnuInventario;
     javax.swing.JMenuItem mnuInventarizar;
-    javax.swing.JMenuItem mnuInventarizar2;
-    javax.swing.JMenu mnuServicios;
-    javax.swing.JMenu mnuSucursales;
-    javax.swing.JMenu mnuSucursales1;
+    javax.swing.JMenu mnuMantenimiento;
+    javax.swing.JMenu mnuReportes;
     javax.swing.JMenu mnuUsuario;
+    javax.swing.JMenuItem mnuVerReportes;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,7 +7,6 @@ package proyecto.Mantenimiento;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
-import Clases.ConsultaClientes;
 
 import java.awt.Image;
 import java.io.File;
@@ -16,6 +15,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import Clases.conectar;
+import Clases.Queries_Clientes;
 
 public class frmClientes extends javax.swing.JInternalFrame {
 
@@ -60,7 +61,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
         jButton9 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboSexo = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -214,8 +215,8 @@ public class frmClientes extends javax.swing.JInternalFrame {
         jLabel8.setText("Correo");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 69, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 150, -1));
+        cboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
+        getContentPane().add(cboSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 150, -1));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menu.jpg"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 500));
@@ -223,36 +224,51 @@ public class frmClientes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+     conectar conn = new conectar();
+     Queries_Clientes consultas = new Queries_Clientes();
+     //Metodo que sirve para guardar los datos
+    private void guardar(){
+        //trato de acceder a la BD para luego hacer una query de insert
         try{
+            conn.conexion();
+            Statement query = conn.conexion().createStatement();
             
-            //Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            String db="jdbc:sqlserver://;database=teatro;integratedSecurity=true;";
-            Connection cn=DriverManager.getConnection(db, "", "");
-            Statement s=cn.createStatement();
-
-            String id_Cliente;
-            String nom_cliente=txtNombre.getText();
-            String Cedula=txtCedula.getText();
-            String Direccion=txtDirecc.getText();
-            String Telefono=txtTel.getText();
-            String Correo=txtCorreo.getText();
-//            s.execute("insert into Cliente values('"+nom_cliente+"','"+ape_cliente+"','"+Cedula+"','"
-//                +Telefono+"','"+Direccion+"','"+Correo+"','"+id_Cliente+"')");
-            acc.Buscar(tblDatos);
-            JOptionPane.showMessageDialog(rootPane, "Datos Guardados");
-
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane,"El error es "+ex);
+            String nombre = this.txtNombre.getText();
+            String cedula = this.txtCedula.getText();
+            String direccion = this.txtDirecc.getText();
+            String telefono = this.txtTel.getText();
+            String correo = this.txtCorreo.getText();
+            String sexo = this.cboSexo.getSelectedItem().toString();
+            
+            //Inserta los valores a la tabla
+            query.execute("INSERT INTO cliente VALUES('"+nombre+"','"+cedula+"','"+direccion+"','"+
+                    telefono+"','"+correo+"','"+sexo+"');");
+            
+                                
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane,"El error es: "+e);
         }
+    }
+    
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        guardar();
+        JOptionPane.showMessageDialog(rootPane, "Datos Guardados");
+        consultas.buscar(tblDatos);
+        limpiar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+    
+    public void limpiar(){
         txtNombre.setText(null);
         txtCedula.setText(null);
         txtCorreo.setText(null);
         txtTel.setText(null);
         txtDirecc.setText(null);
+        cboSexo.setSelectedItem("M");
+    }
+    
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        limpiar();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -262,75 +278,67 @@ public class frmClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     
-            ConsultaClientes acc = new ConsultaClientes();
+          Queries_Clientes acc = new Queries_Clientes();
             
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        acc.Buscar(tblDatos);
+        consultas.buscar(tblDatos);
     }//GEN-LAST:event_jButton1ActionPerformed
 File fichero;
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-
-        
+// Este selecciona la fila deseada para modificar y a su vez, pone los valores del registro en su respectivo campo
         int FilaSelec =  tblDatos.getSelectedRow();
         if (FilaSelec>=0){
             txtNombre.setText(tblDatos.getValueAt(FilaSelec, 1).toString());
-            txtCedula.setText(tblDatos.getValueAt(FilaSelec,3).toString());
-            txtDirecc.setText(tblDatos.getValueAt(FilaSelec,4).toString());
-            txtTel.setText(tblDatos.getValueAt(FilaSelec,5).toString());
-            txtCorreo.setText(tblDatos.getValueAt(FilaSelec, 6).toString());
-            String codigo = String.valueOf(tblDatos.getValueAt(FilaSelec, 0));
-     acc.deletePersona(codigo);
-     acc.Buscar(tblDatos);
+            txtCedula.setText(tblDatos.getValueAt(FilaSelec, 2).toString());
+            txtCorreo.setText(tblDatos.getValueAt(FilaSelec, 3).toString());
+            txtTel.setText(tblDatos.getValueAt(FilaSelec, 4).toString());
+            txtDirecc.setText(tblDatos.getValueAt(FilaSelec, 5).toString());            
+            cboSexo.setSelectedItem(tblDatos.getValueAt(FilaSelec, 6).toString());
+
         }else{
             JOptionPane.showMessageDialog(this,"Fila NO Seleccionada","Row Defaul Error",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int fila = tblDatos.getSelectedRow();
-        if (fila >= 0){
-             
-        String codigo = String.valueOf(tblDatos.getValueAt(fila, 0));
-        acc.deletePersona(codigo);
-        acc.Buscar(tblDatos);
+        //Metodo para eliminar los registros seleccionados de la tabla [tblDatos]
+        int resp=JOptionPane.showConfirmDialog(this,"¿Desea Eliminar este Registro?","Eliminar",JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE);
+        if(resp==0){
+            //Si la respuesta es "Si", este procede a eliminar dicho registro
+            int fila = tblDatos.getSelectedRow();
+            if (fila >= 0){
+                String codigo = String.valueOf(tblDatos.getValueAt(fila, 0));
+                consultas.eliminar(codigo);
+                if (consultas.eliminar(codigo)){
+                    consultas.buscar(tblDatos);
+                    JOptionPane.showMessageDialog(rootPane, "Registro Eliminado");
+                }                         
+            }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnSalvaGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvaGuardarActionPerformed
-        try{
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            String db="jdbc:ucanaccess://"+"C:/proyecto/VentaRepuestos.accdb";
-            Connection cn=DriverManager.getConnection(db, "", "");
-            Statement s=cn.createStatement();
-
-            String nom_cliente=txtNombre.getText();
-            String Cedula=txtCedula.getText();
-            String Direccion=txtDirecc.getText();
-            String Telefono=txtTel.getText();
-            String Correo=txtCorreo.getText();
-//            s.execute("insert into Cliente values('"+nom_cliente+"','"+ape_cliente+"','"+Cedula+"','"
-//                +Telefono+"','"+Direccion+"','"+Correo+"','"+id_Cliente+"')");
-            
-            JOptionPane.showMessageDialog(rootPane, "Datos Modificados Correctamente");
-
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane,"El error es "+ex);
-        }
-        txtNombre.setText(null);
-        txtCedula.setText(null);
-        txtCorreo.setText(null);
-        txtTel.setText(null);
-        txtDirecc.setText(null);
-        acc.Buscar(tblDatos);
+        //Boton para hacer la confirmacion de los datos modificados y a la vez los inserta en la tabla
+            int FilaSelec =  tblDatos.getSelectedRow();
+            String codigo = String.valueOf(tblDatos.getValueAt(FilaSelec, 0));
+            consultas.modificar(codigo,txtNombre.getText(),txtCedula.getText(),txtCorreo.getText(),txtTel.getText(),
+                        txtDirecc.getText(), cboSexo.getSelectedItem().toString());
+            JOptionPane.showMessageDialog(rootPane, "Datos Modificados");
+            //Cuando modifica los datos, los campos se limpian
+            limpiar();
+            consultas.buscar(tblDatos);        
     }//GEN-LAST:event_btnSalvaGuardarActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        //Boton para moverse hacia el registro anterior en la tabla
         int fila1= tblDatos.getSelectedRow();
         fila1=fila1-1;
         tblDatos.setRowSelectionInterval(fila1, fila1);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        //Boton para moverse hacia delante en la tabla
         int fila1= tblDatos.getSelectedRow();
         fila1=fila1+1;
         tblDatos.setRowSelectionInterval(fila1, fila1);
@@ -347,11 +355,11 @@ File fichero;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnSalvaGuardar;
+    private javax.swing.JComboBox<String> cboSexo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
