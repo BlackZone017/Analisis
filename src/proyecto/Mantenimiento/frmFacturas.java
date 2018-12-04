@@ -7,7 +7,10 @@ package proyecto.Mantenimiento;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
-import Clases.ConsultaFacturas;
+import Clases.Queries_Facturas;
+import Clases.conectar;
+import java.util.Calendar;
+import java.util.Date;
 
 public class frmFacturas extends javax.swing.JInternalFrame {
 
@@ -17,7 +20,8 @@ public class frmFacturas extends javax.swing.JInternalFrame {
     public frmFacturas() {
         initComponents();
     }
-        ConsultaFacturas acc = new ConsultaFacturas();
+     conectar conn = new conectar();
+     Queries_Facturas consultas = new Queries_Facturas();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,7 +35,6 @@ public class frmFacturas extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtCantidad = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -39,7 +42,7 @@ public class frmFacturas extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         txtCliente = new javax.swing.JFormattedTextField();
-        txtArticulo = new javax.swing.JFormattedTextField();
+        txtProducto = new javax.swing.JFormattedTextField();
         txtEmpleado = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatos = new javax.swing.JTable();
@@ -50,6 +53,8 @@ public class frmFacturas extends javax.swing.JInternalFrame {
         jButton7 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        txtCantidad = new javax.swing.JTextField();
+        txtTipoPago = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -72,9 +77,6 @@ public class frmFacturas extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
         jLabel6.setText("Cantidad");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 69, -1));
-
-        txtCantidad.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 140, -1));
 
         jLabel7.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
         jLabel7.setText("Precio");
@@ -117,27 +119,15 @@ public class frmFacturas extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 150, -1));
 
-        try {
-            txtCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("A-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        txtCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtCliente.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         getContentPane().add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 140, -1));
 
-        try {
-            txtArticulo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("A-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtArticulo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        getContentPane().add(txtArticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 140, -1));
+        txtProducto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtProducto.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        getContentPane().add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 140, -1));
 
-        try {
-            txtEmpleado.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("A-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        txtEmpleado.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         txtEmpleado.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         getContentPane().add(txtEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 140, -1));
 
@@ -209,6 +199,12 @@ public class frmFacturas extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
 
+        txtCantidad.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 140, -1));
+
+        txtTipoPago.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        getContentPane().add(txtTipoPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 140, -1));
+
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menu.jpg"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 450));
 
@@ -216,34 +212,47 @@ public class frmFacturas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try{
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            String db="jdbc:ucanaccess://"+"C:/proyecto/VentaRepuestos.accdb";
-            Connection cn=DriverManager.getConnection(db, "", "");
-            Statement s=cn.createStatement();
-
-            String id_Clientes=txtCliente.getText();
-            String id_Empleado=txtEmpleado.getText();
-            String Articulo=txtArticulo.getText();
-            int Cantidad=Integer.parseInt(txtCantidad.getText());
-            int Precio=Integer.parseInt(txtPrecio.getText());
-            int suma = Cantidad * Precio;
-            s.execute("insert into FacturaArticulos values('"+Articulo+"','"+id_Clientes+"','"+id_Empleado+"','"+"','"
-                +Cantidad+"','"+Precio+"')");
-            JOptionPane.showMessageDialog(rootPane, "Datos Guardados");
-
-            acc.Buscar(tblDatos);
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane,"El error es "+ex);
-        }
+        guardar();
+        JOptionPane.showMessageDialog(rootPane, "Datos Guardados");
+        consultas.buscar(tblDatos);
+        limpiar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void guardar(){
+        //trato de acceder a la BD para luego hacer una query de insert
+        try{
+            conn.conexion();
+            Statement query = conn.conexion().createStatement();
+            
+            String idCliente = this.txtCliente.getText();
+            String idEmpleado = this.txtEmpleado.getText();
+            String idProducto = this.txtProducto.getText();
+            String precio = this.txtPrecio.getText();
+            String cantidad = this.txtCantidad.getText(); 
+            String tipoPago = this.txtTipoPago.getText();
+            
+            //Inserta los valores a la tabla
+            
+            query.execute("INSERT INTO factura VALUES('"+idCliente+"','"+idEmpleado+"','"+idProducto+"','"+
+                    cantidad+"','"+precio+"','"+tipoPago+"');");
+                                
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane,"El error es: "+e);
+        }
+    }
+    
+    public void limpiar(){
         txtCliente.setText(null);
         txtEmpleado.setText(null);
+        txtProducto.setText(null);
         txtPrecio.setText(null);
-        txtCantidad.setText(null);
-        txtArticulo.setText(null);
+        txtCantidad.setText(null); 
+        txtTipoPago.setText(null);
+        
+    }
+    
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        limpiar();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -253,64 +262,54 @@ public class frmFacturas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        acc.Buscar(tblDatos);
+        consultas.buscar(tblDatos);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        int fila = tblDatos.getSelectedRow();
-        if (fila >= 0){
-
-            String codigo = String.valueOf(tblDatos.getValueAt(fila, 0));
-            acc.deletePersona(codigo);
-            acc.Buscar(tblDatos);
+        //Metodo para eliminar los registros seleccionados de la tabla [tblDatos]
+        int resp=JOptionPane.showConfirmDialog(this,"¿Desea Eliminar este Registro?","Eliminar",JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE);
+        if(resp==0){
+            //Si la respuesta es "Si", este procede a eliminar dicho registro
+            int fila = tblDatos.getSelectedRow();
+            if (fila >= 0){
+                String codigo = String.valueOf(tblDatos.getValueAt(fila, 0));
+                consultas.eliminar(codigo);
+                if (consultas.eliminar(codigo)){
+                    consultas.buscar(tblDatos);
+                    JOptionPane.showMessageDialog(rootPane, "Registro Eliminado");
+                }                         
+            }
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
 
+        // Este selecciona la fila deseada para modificar y a su vez, pone los valores del registro en su respectivo campo
         int FilaSelec =  tblDatos.getSelectedRow();
         if (FilaSelec>=0){
+
             txtCliente.setText(tblDatos.getValueAt(FilaSelec, 1).toString());
             txtEmpleado.setText(tblDatos.getValueAt(FilaSelec, 2).toString());
-            txtArticulo.setText(tblDatos.getValueAt(FilaSelec,4).toString());
-            txtCantidad.setText(tblDatos.getValueAt(FilaSelec,5).toString());
-            txtPrecio.setText(tblDatos.getValueAt(FilaSelec, 6).toString());
-            String codigo = String.valueOf(tblDatos.getValueAt(FilaSelec, 0));
-            acc.deletePersona(codigo);
-            acc.Buscar(tblDatos);
-        
+            txtProducto.setText(tblDatos.getValueAt(FilaSelec, 3).toString());
+            txtPrecio.setText(tblDatos.getValueAt(FilaSelec, 5).toString());
+            txtCantidad.setText(tblDatos.getValueAt(FilaSelec, 4).toString());
+            txtTipoPago.setText(tblDatos.getValueAt(FilaSelec, 6).toString());
         }else{
             JOptionPane.showMessageDialog(this,"Fila NO Seleccionada","Row Defaul Error",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        try{
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            String db="jdbc:ucanaccess://"+"C:/proyecto/VentaRepuestos.accdb";
-            Connection cn=DriverManager.getConnection(db, "", "");
-            Statement s=cn.createStatement();
-
-            String id_Clientes=txtCliente.getText();
-            String id_Empleado=txtEmpleado.getText();
-            String Articulo=txtArticulo.getText();
-            int Cantidad=Integer.parseInt(txtCantidad.getText());
-            int Precio=Integer.parseInt(txtPrecio.getText());
-            int suma = Cantidad * Precio;
-            s.execute("insert into FacturaArticulos values('"+Articulo+"','"+id_Clientes+"','"+id_Empleado+"','"
-                +Cantidad+"','"+Precio+"')");
-            JOptionPane.showMessageDialog(rootPane, "Datos Modificados Correctamente");
-
-            acc.Buscar(tblDatos);
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane,"El error es "+ex);
-        }
-        txtCliente.setText(null);
-        txtEmpleado.setText(null);
-        txtPrecio.setText(null);
-        txtCantidad.setText(null);
-        txtArticulo.setText(null);
+        //Boton para hacer la confirmacion de los datos modificados y a la vez los inserta en la tabla
+            int FilaSelec =  tblDatos.getSelectedRow();
+            String codigo = String.valueOf(tblDatos.getValueAt(FilaSelec, 0));
+            consultas.modificar(codigo,txtCliente.getText(),txtEmpleado.getText(),txtProducto.getText(),txtPrecio.getText(),
+                        txtCantidad.getText(),txtTipoPago.getText());
+            JOptionPane.showMessageDialog(rootPane, "Datos Modificados");
+            //Cuando modifica los datos, los campos se limpian
+            limpiar();
+            consultas.buscar(tblDatos); 
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -347,10 +346,11 @@ public class frmFacturas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDatos;
-    private javax.swing.JFormattedTextField txtArticulo;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JFormattedTextField txtCliente;
     private javax.swing.JFormattedTextField txtEmpleado;
     private javax.swing.JTextField txtPrecio;
+    private javax.swing.JFormattedTextField txtProducto;
+    private javax.swing.JTextField txtTipoPago;
     // End of variables declaration//GEN-END:variables
 }

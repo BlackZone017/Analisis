@@ -7,7 +7,7 @@ package proyecto;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
-import Clases.ConsultaEmpresas;
+//import Clases.ConsultaEmpresas;
 
 public class frmEmpresa extends javax.swing.JInternalFrame {
 
@@ -17,7 +17,7 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
     public frmEmpresa() {
         initComponents();
     }
-        ConsultaEmpresas acc = new ConsultaEmpresas();
+        //ConsultaEmpresas acc = new ConsultaEmpresas();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -214,7 +214,7 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
             s.execute("insert into Empresa values('"+nom_empresa+"','"+rnc+"','"+Direccion+"','"+Telefono+"','"+Correo+"')");
             JOptionPane.showMessageDialog(rootPane, "Datos Guardados");
 
-            acc.Buscar(tblDatos);
+            //acc.Buscar(tblDatos);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(rootPane,"El error es "+ex);
         }
@@ -237,7 +237,7 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        acc.Buscar(tblDatos);
+        //acc.Buscar(tblDatos);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -245,8 +245,8 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
         if (fila >= 0){
 
             String codigo = String.valueOf(tblDatos.getValueAt(fila, 0));
-            acc.deletePersona(codigo);
-            acc.Buscar(tblDatos);
+//            acc.deletePersona(codigo);
+//            acc.Buscar(tblDatos);
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -261,8 +261,8 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
             txtCorreo.setText(tblDatos.getValueAt(FilaSelec,4).toString());
            
             String codigo = String.valueOf(tblDatos.getValueAt(FilaSelec, 0));
-            acc.deletePersona(codigo);
-            acc.Buscar(tblDatos);
+//            acc.deletePersona(codigo);
+//            acc.Buscar(tblDatos);
         }else{
             JOptionPane.showMessageDialog(this,"Fila NO Seleccionada","Row Defaul Error",JOptionPane.INFORMATION_MESSAGE);
         }
@@ -282,7 +282,7 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
             String Correo=txtCorreo.getText();
             s.execute("insert into Empresa values('"+nom_empresa+"','"+rnc+"','"+Direccion+"','"+Telefono+"','"+Correo+"')");
             JOptionPane.showMessageDialog(rootPane, "Datos Modificados Correctamente");
-            acc.Buscar(tblDatos);
+//            acc.Buscar(tblDatos);
 
         }catch(Exception ex){
             JOptionPane.showMessageDialog(rootPane,"El error es "+ex);

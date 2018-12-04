@@ -7,7 +7,6 @@ package proyecto;
 import proyecto.Mantenimiento.frmProducto;
 import proyecto.Mantenimiento.frmEmpleados;
 import proyecto.Mantenimiento.frmClientes;
-import proyecto.Mantenimiento.frmInventario;
 import proyecto.Mantenimiento.frmFacturas;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -60,8 +59,6 @@ public class Menu extends javax.swing.JFrame {
         mnuAgregarEmpleados = new javax.swing.JMenuItem();
         mnuFacturas = new javax.swing.JMenu();
         mnuAgregarFacturas = new javax.swing.JMenuItem();
-        mnuInventario = new javax.swing.JMenu();
-        mnuInventarizar = new javax.swing.JMenuItem();
         mnuArticulos = new javax.swing.JMenu();
         menuAgregarProductos = new javax.swing.JMenuItem();
         mnuConsultas = new javax.swing.JMenu();
@@ -149,20 +146,6 @@ public class Menu extends javax.swing.JFrame {
         mnuFacturas.add(mnuAgregarFacturas);
 
         mnuMantenimiento.add(mnuFacturas);
-
-        mnuInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/inventario2.png"))); // NOI18N
-        mnuInventario.setText("Inventario ");
-
-        mnuInventarizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/inventario1.png"))); // NOI18N
-        mnuInventarizar.setText("Inventario");
-        mnuInventarizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuInventarizarActionPerformed(evt);
-            }
-        });
-        mnuInventario.add(mnuInventarizar);
-
-        mnuMantenimiento.add(mnuInventario);
 
         mnuArticulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/articulo.png"))); // NOI18N
         mnuArticulos.setText("Productos");
@@ -293,12 +276,6 @@ public class Menu extends javax.swing.JFrame {
         abrir.show(true);
     }//GEN-LAST:event_mnuVerReportesActionPerformed
 
-    private void mnuInventarizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuInventarizarActionPerformed
-       frmInventario abrir=new frmInventario();
-       this.escritorio.add(abrir);
-       abrir.show(true);
-    }//GEN-LAST:event_mnuInventarizarActionPerformed
-
     private void mnuAgregarFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarFacturasActionPerformed
         frmFacturas abrir=new frmFacturas();
         this.escritorio.add(abrir);
@@ -393,8 +370,6 @@ public class Menu extends javax.swing.JFrame {
     javax.swing.JMenu mnuConsultas;
     javax.swing.JMenu mnuEmpleados;
     javax.swing.JMenu mnuFacturas;
-    javax.swing.JMenu mnuInventario;
-    javax.swing.JMenuItem mnuInventarizar;
     javax.swing.JMenu mnuMantenimiento;
     javax.swing.JMenu mnuReportes;
     javax.swing.JMenu mnuUsuario;

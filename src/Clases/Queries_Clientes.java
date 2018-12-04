@@ -24,32 +24,7 @@ public class Queries_Clientes {
     Statement ejecutar;
     ResultSet resultado;
     String query;
-            
-//    public boolean validarEmail(String email){
-//        String registros;     
-//        query = "SELECT usuario FROM cliente"; //Query que ejecutare
-//       
-//        try{
-//            conn.conexion(); //hago la conexion
-//            ejecutar = conn.conexion().createStatement(); //creo mi declaracion
-//            resultado=ejecutar.executeQuery(query);
-//            
-//            //bucle para evaluar todos los datos que hay en el campo email
-//            while (resultado.next()){               
-//                registros = resultado.getString("u");
-//                
-//                //Condicion que me evalua cada resultado de la consulta, y que si existe al menos un email creado
-//                //me diga que este email ya existe
-//                if(registros.equals(email)){
-//                    return true;
-//                }
-//            }
-//        }catch(Exception w){
-//            return false;
-//        }
-//        return false;
-//    }
-    
+               
     
     public void buscar(JTable tabla){
         //Columnas a mostrarse en la tabla

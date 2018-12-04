@@ -7,14 +7,10 @@ package proyecto.Mantenimiento;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
-import Clases.ConsultaEmpleados;
+import Clases.Queries_Empleados;
+import Clases.conectar;
 
-import java.awt.Image;
 import java.io.File;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class frmEmpleados extends javax.swing.JInternalFrame {
 
@@ -25,7 +21,8 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         initComponents();
     }
 
-            ConsultaEmpleados acc = new ConsultaEmpleados();
+     conectar conn = new conectar();
+     Queries_Empleados consultas = new Queries_Empleados();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,7 +33,7 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        txtCorreo = new javax.swing.JTextField();
+        txtSueldo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -44,7 +41,7 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        txtApellido = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         txtDireccion = new javax.swing.JTextField();
@@ -62,7 +59,7 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         jButton9 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboSexo = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -73,7 +70,7 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
         jLabel2.setText("Cargo");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
-        getContentPane().add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 210, -1));
+        getContentPane().add(txtSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 210, -1));
 
         jLabel3.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
         jLabel3.setText("Correo");
@@ -114,7 +111,7 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
         jLabel7.setText("Sueldo");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 69, -1));
-        getContentPane().add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, 210, -1));
+        getContentPane().add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, 210, -1));
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 210, -1));
 
         jButton4.setBackground(new java.awt.Color(0, 0, 102));
@@ -226,8 +223,8 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         jLabel12.setText("Dirección");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, 80, -1));
+        cboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
+        getContentPane().add(cboSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, 80, -1));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menu.jpg"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 540));
@@ -236,38 +233,50 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try{
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            String db="jdbc:ucanaccess://"+"C:/proyecto/VentaRepuestos.accdb";
-            Connection cn=DriverManager.getConnection(db, "", "");
-            Statement s=cn.createStatement();
-
-            String nom_empleado=txtNombre.getText();
-            String ape_empleado=txtApellido.getText();
-            String Cedula=txtCedula.getText();
-            String Direccion=txtDireccion.getText();
-            String Telefono=txtTelefono.getText();
-            String Correo=txtCorreo.getText();
-            String Cargo=txtCargo.getText();
-            s.execute("insert into Empleado values('"+nom_empleado+"','"+ape_empleado+"','"+Cedula+"','"
-                +Telefono+"','"+Correo+"','"+Direccion+"','"+Cargo+"')");
-            JOptionPane.showMessageDialog(rootPane, "Datos Guardados");
-
-            acc.Buscar(tblDatos);
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane,"El error es "+ex);
-        }
+        guardar();
+        JOptionPane.showMessageDialog(rootPane, "Datos Guardados");
+        consultas.buscar(tblDatos);
+        limpiar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       
+    private void guardar(){
+        //trato de acceder a la BD para luego hacer una query de insert
+        try{
+            conn.conexion();
+            Statement query = conn.conexion().createStatement();
+            
+            String nombre = this.txtNombre.getText();
+            String cedula = this.txtCedula.getText();
+            String cargo = this.txtCargo.getText();
+            String sueldo = this.txtSueldo.getText();
+            String direccion = this.txtDireccion.getText(); 
+            String telefono = this.txtTelefono.getText();
+            String correo = this.txtCorreo.getText();
+            String sexo = this.cboSexo.getSelectedItem().toString();
+            
+            //Inserta los valores a la tabla
+            query.execute("INSERT INTO empleado VALUES('"+nombre+"','"+cedula+"','"+cargo+"','"+
+                    sueldo+"','"+direccion+"','"+telefono+"','"+correo+"','"+sexo+"');");
+            
+                                
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane,"El error es: "+e);
+        }
+    }
+    
+    public void limpiar(){
         txtNombre.setText(null);
-        txtApellido.setText(null);
         txtCedula.setText(null);
-        txtTelefono.setText(null);
-        txtDireccion.setText(null);
-        txtCorreo.setText(null);
         txtCargo.setText(null);
+        txtSueldo.setText(null);
+        txtDireccion.setText(null); 
+        txtTelefono.setText(null);
+        txtCorreo.setText(null);
+        cboSexo.setSelectedItem("M");
+    }
+    
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        limpiar();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -281,68 +290,56 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        acc.Buscar(tblDatos);
+        consultas.buscar(tblDatos);
     }//GEN-LAST:event_jButton1ActionPerformed
-File fichero;
+    File fichero;
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        int fila = tblDatos.getSelectedRow();
-        if (fila >= 0){
-
-            String codigo = String.valueOf(tblDatos.getValueAt(fila, 0));
-            acc.deletePersona(codigo);
-            acc.Buscar(tblDatos);
+        //Metodo para eliminar los registros seleccionados de la tabla [tblDatos]
+        int resp=JOptionPane.showConfirmDialog(this,"¿Desea Eliminar este Registro?","Eliminar",JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE);
+        if(resp==0){
+            //Si la respuesta es "Si", este procede a eliminar dicho registro
+            int fila = tblDatos.getSelectedRow();
+            if (fila >= 0){
+                String codigo = String.valueOf(tblDatos.getValueAt(fila, 0));
+                consultas.eliminar(codigo);
+                if (consultas.eliminar(codigo)){
+                    consultas.buscar(tblDatos);
+                    JOptionPane.showMessageDialog(rootPane, "Registro Eliminado");
+                }                         
+            }
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
 
+        // Este selecciona la fila deseada para modificar y a su vez, pone los valores del registro en su respectivo campo
         int FilaSelec =  tblDatos.getSelectedRow();
         if (FilaSelec>=0){
             txtNombre.setText(tblDatos.getValueAt(FilaSelec, 1).toString());
-            txtApellido.setText(tblDatos.getValueAt(FilaSelec, 2).toString());
-            txtCedula.setText(tblDatos.getValueAt(FilaSelec,3).toString());
-            txtDireccion.setText(tblDatos.getValueAt(FilaSelec,4).toString());
-            txtTelefono.setText(tblDatos.getValueAt(FilaSelec,5).toString());
-            txtCorreo.setText(tblDatos.getValueAt(FilaSelec, 6).toString());
-            txtCargo.setText(tblDatos.getValueAt(FilaSelec, 7).toString());
-            String codigo = String.valueOf(tblDatos.getValueAt(FilaSelec, 0));
-            acc.deletePersona(codigo);
-            acc.Buscar(tblDatos);
+            txtCedula.setText(tblDatos.getValueAt(FilaSelec, 2).toString());
+            txtCargo.setText(tblDatos.getValueAt(FilaSelec, 3).toString());
+            txtSueldo.setText(tblDatos.getValueAt(FilaSelec, 4).toString());
+            txtDireccion.setText(tblDatos.getValueAt(FilaSelec, 5).toString());
+            txtTelefono.setText(tblDatos.getValueAt(FilaSelec, 6).toString());
+            txtCorreo.setText(tblDatos.getValueAt(FilaSelec, 7).toString());
+            cboSexo.setSelectedItem(tblDatos.getValueAt(FilaSelec, 8).toString());
+
         }else{
             JOptionPane.showMessageDialog(this,"Fila NO Seleccionada","Row Defaul Error",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        try{
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            String db="jdbc:ucanaccess://"+"C:/proyecto/VentaRepuestos.accdb";
-            Connection cn=DriverManager.getConnection(db, "", "");
-            Statement s=cn.createStatement();
-
-            String nom_empleado=txtNombre.getText();
-            String ape_empleado=txtApellido.getText();
-            String Cedula=txtCedula.getText();
-            String Direccion=txtDireccion.getText();
-            String Telefono=txtTelefono.getText();
-            String Correo=txtCorreo.getText();
-            String Cargo=txtCargo.getText();
-            s.execute("insert into Empleado values('"+nom_empleado+"','"+ape_empleado+"','"+Cedula+"','"
-                +Telefono+"','"+Correo+"','"+Direccion+"','"+Cargo+"')");
-            JOptionPane.showMessageDialog(rootPane, "Datos Modificados Correctamente");
-            acc.Buscar(tblDatos);
-
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane,"El error es "+ex);
-        }
-        txtNombre.setText(null);
-        txtApellido.setText(null);
-        txtCedula.setText(null);
-        txtTelefono.setText(null);
-        txtDireccion.setText(null);
-        txtCorreo.setText(null);
-        txtCargo.setText(null);
+        //Boton para hacer la confirmacion de los datos modificados y a la vez los inserta en la tabla
+            int FilaSelec =  tblDatos.getSelectedRow();
+            String codigo = String.valueOf(tblDatos.getValueAt(FilaSelec, 0));
+            consultas.modificar(codigo,txtNombre.getText(),txtCedula.getText(),txtCargo.getText(),txtSueldo.getText(),
+                        txtDireccion.getText(),txtTelefono.getText(),txtCorreo.getText(), cboSexo.getSelectedItem().toString());
+            JOptionPane.showMessageDialog(rootPane, "Datos Modificados");
+            //Cuando modifica los datos, los campos se limpian
+            limpiar();
+            consultas.buscar(tblDatos); 
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -360,6 +357,7 @@ File fichero;
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cboSexo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -369,7 +367,6 @@ File fichero;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -382,12 +379,12 @@ File fichero;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDatos;
-    private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCargo;
     private javax.swing.JFormattedTextField txtCedula;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtSueldo;
     private javax.swing.JFormattedTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
