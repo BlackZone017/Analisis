@@ -6,6 +6,11 @@
 package proyecto.Informes_y_usuarios;
 
 import Clases.Queries_Reportes;
+import java.awt.print.PrinterException;
+import java.text.MessageFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
 
 /**
  *
@@ -41,6 +46,7 @@ public class opcionesInformes extends javax.swing.JInternalFrame {
         tblDatos = new javax.swing.JTable();
         jButton9 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        btnReporte7 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -111,13 +117,13 @@ public class opcionesInformes extends javax.swing.JInternalFrame {
         btnReporte5.setBackground(new java.awt.Color(0, 0, 153));
         btnReporte5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnReporte5.setForeground(new java.awt.Color(255, 255, 255));
-        btnReporte5.setText("Cant. Clientes de Hoy");
+        btnReporte5.setText("Imprimir Reporte");
         btnReporte5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporte5ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReporte5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 250, -1));
+        getContentPane().add(btnReporte5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 170, 30));
 
         tblDatos.setBorder(new javax.swing.border.MatteBorder(null));
         tblDatos.setModel(new javax.swing.table.DefaultTableModel(
@@ -147,6 +153,17 @@ public class opcionesInformes extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, -1, -1));
+
+        btnReporte7.setBackground(new java.awt.Color(0, 0, 153));
+        btnReporte7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnReporte7.setForeground(new java.awt.Color(255, 255, 255));
+        btnReporte7.setText("Cant. Clientes de Hoy");
+        btnReporte7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporte7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReporte7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 250, -1));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menu.jpg"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 440));
@@ -180,7 +197,16 @@ public class opcionesInformes extends javax.swing.JInternalFrame {
 
     private void btnReporte5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporte5ActionPerformed
         // TODO add your handling code here:
-        consultas.cantClientesHoy(tblDatos);
+        try {
+           MessageFormat headerFormat = new MessageFormat("Imprimir Informes");
+           MessageFormat footerFormat = new MessageFormat(
+           "Sistema Facturación ZBILL's");
+          tblDatos.print(JTable.PrintMode.NORMAL, headerFormat, footerFormat);
+           
+       } catch (PrinterException e) {
+           Logger.getLogger(opcionesInformes.class.getName()).log
+                   (Level.SEVERE, null, e);
+       }
     }//GEN-LAST:event_btnReporte5ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -195,6 +221,11 @@ public class opcionesInformes extends javax.swing.JInternalFrame {
         tblDatos.setRowSelectionInterval(fila1, fila1);
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void btnReporte7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporte7ActionPerformed
+        // TODO add your handling code here:
+        consultas.cantClientesHoy(tblDatos);
+    }//GEN-LAST:event_btnReporte7ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReporte1;
@@ -203,6 +234,7 @@ public class opcionesInformes extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnReporte4;
     private javax.swing.JButton btnReporte5;
     private javax.swing.JButton btnReporte6;
+    private javax.swing.JButton btnReporte7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
