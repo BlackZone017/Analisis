@@ -21,6 +21,16 @@ public class Log_in extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    public String usuario;
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -137,7 +147,8 @@ public class Log_in extends javax.swing.JFrame {
                      "Bienvenido...",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
             Menu menu = new Menu();
-            
+            menu.lblUsuario.setText("Bienvenido: "+txtusu.getText());
+            //System.out.println(this.getUsuario());
             if("Administrador".equals(cboTipo.getSelectedItem().toString())){
                 menu.Admin();
                 menu.setVisible(true);
@@ -147,6 +158,7 @@ public class Log_in extends javax.swing.JFrame {
                 menu.setVisible(true);
                 this.dispose();
              }
+            
             
         }else{
             JOptionPane.showMessageDialog(rootPane, "No se pudo acceder al Sistema \nUsuario, Contraseña o Perfil Incorrecto(a)","Sistema",JOptionPane.WARNING_MESSAGE);

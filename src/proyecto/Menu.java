@@ -23,24 +23,24 @@ import proyecto.Informes_y_usuarios.opcionesInformes;
 
 public class Menu extends javax.swing.JFrame {
 
+    String username;
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
     
     public Menu() {
         initComponents();
-         this.setLocationRelativeTo(null);
-        
+        this.setLocationRelativeTo(null);
+       // lblUsuario.setText("Bienvenido: "+log.usuario);
+        //System.out.println(username);
     }
 
-//    public void Admin(){
-//        mnuClientes.setEnabled(true);
-//        mnuEmpleados.setEnabled(true);
-//        mnuUsuario.setEnabled(true);
-//        mnuFacturas.setEnabled(true);
-//        mnuInventario.setEnabled(true);
-//        mnuArticulos.setEnabled(true);
-//        mnuReportes.setEnabled(true);
-//        mnuAyuda.setEnabled(true);
-//        mnuCerrar.setEnabled(true);
-//    }
+
     public void Empleado(){
         mnuMantenimiento.setVisible(false);
         mnuUsuario.setVisible(false);
@@ -58,6 +58,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         escritorio = new javax.swing.JDesktopPane();
         jLabel4 = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuMantenimiento = new javax.swing.JMenu();
@@ -96,6 +97,11 @@ public class Menu extends javax.swing.JFrame {
         jLabel4.setText("SISTEMA DE FACTURACION ZBILL'S");
         escritorio.add(jLabel4);
         jLabel4.setBounds(50, 10, 950, 80);
+
+        lblUsuario.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        lblUsuario.setText("Bienvenido: ");
+        escritorio.add(lblUsuario);
+        lblUsuario.setBounds(10, 550, 620, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/MENU IMAGEN FACTURA.jpg"))); // NOI18N
         escritorio.add(jLabel1);
@@ -418,6 +424,7 @@ public class Menu extends javax.swing.JFrame {
     javax.swing.JLabel jLabel4;
     javax.swing.JMenu jMenu1;
     javax.swing.JMenuBar jMenuBar1;
+    javax.swing.JLabel lblUsuario;
     javax.swing.JMenuItem menuAgregarProductos;
     javax.swing.JMenuItem mnuAgregarClientes;
     javax.swing.JMenuItem mnuAgregarEmpleados;
