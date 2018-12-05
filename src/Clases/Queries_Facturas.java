@@ -27,8 +27,8 @@ public class Queries_Facturas {
     
     public void buscar(JTable tabla){
         //Columnas a mostrarse en la tabla
-        String [] columnas={"ID Factura","Cliente","Empleado", "Producto","Cantidad","Precio","Tipo Pago","fecha"};
-        String [] registros=new String[9];
+        String [] columnas={"ID Factura","Cliente","Empleado", "Producto","Cantidad","Tipo Pago","fecha"};
+        String [] registros=new String[7];
         ModeloTabla=new DefaultTableModel(null,columnas);
         
         query = "SELECT * FROM factura"; //Query que ejecutare
@@ -44,9 +44,8 @@ public class Queries_Facturas {
                 registros[2]=resultado.getString("idEmpleado");
                 registros[3]=resultado.getString("idProducto");
                 registros[4]=resultado.getString("cantidad");
-                registros[5]=resultado.getString("precio");
-                registros[6]=resultado.getString("tipoPago");
-                registros[7]=resultado.getString("fecha");
+                registros[5]=resultado.getString("tipoPago");
+                registros[6]=resultado.getString("fecha");
                 
                 ModeloTabla.addRow(registros);
             }
@@ -79,13 +78,13 @@ public class Queries_Facturas {
         }
     }
     
-    public void modificar(String codigo, String cliente, String empleado,String producto, String cantidad, String precio, String tipoPago,String fecha){
+    public void modificar(String codigo, String cliente, String empleado,String producto, String cantidad, String tipoPago,String fecha){
         conn.conexion();
         try{
             conn.conexion();
             Statement query = conn.conexion().createStatement();
             query.execute("update factura set idCliente = '"+cliente+"', idEmpleado = '"+empleado+
-                   "', idProducto='"+producto+"', cantidad='"+cantidad+"', precio='"+precio+
+                   "', idProducto='"+producto+"', cantidad='"+cantidad+
                     "', tipoPago='"+tipoPago+"', fecha='"+fecha+"' where idFactura="+codigo);
             
                 

@@ -42,6 +42,9 @@ public class frmAyuda extends javax.swing.JInternalFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N

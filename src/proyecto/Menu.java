@@ -12,6 +12,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import proyecto.Informes_y_usuarios.frmUsuarios;
+import proyecto.Informes_y_usuarios.opcionesInformes;
 
 
 public class Menu extends javax.swing.JFrame {
@@ -284,6 +285,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void mnuVerReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVerReportesActionPerformed
         //frmServicios abrir=new frmServicios();
+        opcionesInformes abrir = new opcionesInformes();
         this.escritorio.add(abrir);
         abrir.show(true);
     }//GEN-LAST:event_mnuVerReportesActionPerformed
