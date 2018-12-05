@@ -5,6 +5,8 @@
  */
 package proyecto.Consultas;
 
+import Clases.Queries_Clientes;
+
 /**
  *
  * @author gouripc
@@ -32,25 +34,23 @@ public class consultaClientes extends javax.swing.JInternalFrame {
         jButton8 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatos = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        cbobuscar = new javax.swing.JComboBox();
+        txtValorBusqueda = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 102));
         jLabel1.setText(" Consultar Clientes");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
 
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/anterior.png"))); // NOI18N
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -58,7 +58,7 @@ public class consultaClientes extends javax.swing.JInternalFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, -1, -1));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, -1, -1));
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/next.png"))); // NOI18N
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +66,7 @@ public class consultaClientes extends javax.swing.JInternalFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, -1, -1));
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, -1, -1));
 
         tblDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,84 +78,55 @@ public class consultaClientes extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tblDatos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 470, 120));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 590, 140));
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 153));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Buscar Todos");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.setBackground(new java.awt.Color(0, 0, 153));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Registros (Todos)");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 170, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 113, 170, 30));
 
-        jLabel10.setFont(new java.awt.Font("Century", 1, 14)); // NOI18N
-        jLabel10.setText("Consultar Por:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel11.setText("Buscar Todos");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, 20));
 
-        jCheckBox1.setBackground(new java.awt.Color(51, 153, 255));
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jCheckBox1.setText("Correo");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbobuscar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        cbobuscar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar:", "Nombre", "Cedula", "Correo" }));
+        cbobuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                cbobuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, 30));
+        getContentPane().add(cbobuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 170, 30));
+        getContentPane().add(txtValorBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 120, 30));
 
-        jCheckBox2.setBackground(new java.awt.Color(51, 153, 255));
-        jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jCheckBox2.setText("Cedula");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+        jButton6.setBackground(new java.awt.Color(0, 0, 153));
+        jButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setText("Buscar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+                jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, 30));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 150, 90, 30));
 
-        jCheckBox3.setBackground(new java.awt.Color(51, 153, 255));
-        jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jCheckBox3.setText("Nombre");
-        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, 30));
-
-        jCheckBox4.setBackground(new java.awt.Color(51, 153, 255));
-        jCheckBox4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jCheckBox4.setText("Telefono");
-        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox4ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jCheckBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, 30));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 250, 30));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 250, 30));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 250, 30));
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 250, 30));
-
-        jButton2.setBackground(new java.awt.Color(0, 0, 153));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Buscar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 170, -1));
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setText("Buscar Por");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, 30));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menu.jpg"))); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 500));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 410));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    Queries_Clientes consultas = new Queries_Clientes();
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         int fila1= tblDatos.getSelectedRow();
         fila1=fila1-1;
@@ -168,48 +139,31 @@ public class consultaClientes extends javax.swing.JInternalFrame {
         tblDatos.setRowSelectionInterval(fila1, fila1);
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //acc.Buscar(tblDatos);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       consultas.buscar(tblDatos);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void cbobuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbobuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_cbobuscarActionPerformed
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
-
-    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox3ActionPerformed
-
-    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox4ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        consultas.buscarPor(txtValorBusqueda.getText(),cbobuscar.getSelectedItem().toString(),tblDatos);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox cbobuscar;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTable tblDatos;
+    private javax.swing.JTextField txtValorBusqueda;
     // End of variables declaration//GEN-END:variables
 }

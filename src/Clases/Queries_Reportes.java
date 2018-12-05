@@ -89,7 +89,7 @@ public class Queries_Reportes {
         
         query = "SELECT sum(f.cantidad*p.precio) 'Total Vendido',f.fecha 'Fecha Actual' FROM factura f\n" +
                 "JOIN producto p on (p.idProducto = f.idProducto)\n" +
-                "WHERE f.fecha=GETDATE() AND p.idProducto = f.idProducto\n" +
+                "WHERE f.fecha=CONVERT (date, GETDATE()) AND p.idProducto = f.idProducto\n" +
                 "GROUP BY f.fecha"; //Query que ejecutare
         
         try{
@@ -125,6 +125,58 @@ public class Queries_Reportes {
             
             while(resultado.next()){
                 registros[0]=resultado.getString("Total Vendido");
+                registros[1]=resultado.getString("Mes");
+                registros[2]=resultado.getString("Año");
+                    
+                ModeloTabla.addRow(registros);
+            }
+            tabla.setModel(ModeloTabla);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error en la tabla SQL: "+e);
+        }
+    }
+    
+    public void cantClientesHoy(JTable tabla){
+        String [] columnas={"Cant. Clientes","Fecha Actual"};
+        String [] registros=new String[4];
+        ModeloTabla=new DefaultTableModel(null,columnas);
+        
+        query = "SELECT COUNT(idCliente) 'Cant. Clientes',fecha 'Fecha Actual' FROM factura\n" +
+                "WHERE fecha = CONVERT (date, GETDATE())\n" +
+                "GROUP BY fecha;"; //Query que ejecutare
+        
+        try{
+            conn.conexion(); //hago la conexion
+            ejecutar = conn.conexion().createStatement(); //creo mi declaracion
+            resultado=ejecutar.executeQuery(query); //le paso la query a mi declaracion y le paso los valores al result set
+            
+            while(resultado.next()){
+                registros[0]=resultado.getString("Cant. Clientes");
+                registros[1]=resultado.getString("Fecha Actual");
+                    
+                ModeloTabla.addRow(registros);
+            }
+            tabla.setModel(ModeloTabla);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error en la tabla SQL: "+e);
+        }
+    }
+    
+    public void cantClientesPorMes(JTable tabla){
+        String [] columnas={"Cant. Clientes","Mes","Año"};
+        String [] registros=new String[4];
+        ModeloTabla=new DefaultTableModel(null,columnas);
+        
+        query = "SELECT COUNT(idCliente) 'Cant. Clientes',DATENAME(month,fecha) 'Mes',YEAR(fecha) 'Año'\n" +
+                "FROM factura GROUP BY DATENAME(month,fecha), YEAR(fecha);"; //Query que ejecutare
+        
+        try{
+            conn.conexion(); //hago la conexion
+            ejecutar = conn.conexion().createStatement(); //creo mi declaracion
+            resultado=ejecutar.executeQuery(query); //le paso la query a mi declaracion y le paso los valores al result set
+            
+            while(resultado.next()){
+                registros[0]=resultado.getString("Cant. Clientes");
                 registros[1]=resultado.getString("Mes");
                 registros[2]=resultado.getString("Año");
                     

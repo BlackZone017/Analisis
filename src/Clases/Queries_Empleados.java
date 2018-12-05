@@ -95,4 +95,37 @@ public class Queries_Empleados {
             JOptionPane.showMessageDialog(null,"El error es: "+e);
         }
     }
+    
+    public void buscarPor(String valor,String cbo, JTable tabla){
+        String [] columnas={"ID Empleado","Nombre","Cedula", "Cargo","Sueldo","Direccion","Telefono","Correo","Sexo"};
+        String [] registros=new String[9];
+        ModeloTabla=new DefaultTableModel(null,columnas);
+        
+        query = "SELECT * FROM empleado WHERE "+cbo+" LIKE '%"+valor+"%';"; //Query que ejecutare
+        
+        try{
+            conn.conexion(); //hago la conexion
+            ejecutar = conn.conexion().createStatement(); //creo mi declaracion
+            resultado=ejecutar.executeQuery(query); //le paso la query a mi declaracion y le paso los valores al result set
+            
+            while(resultado.next()){
+                registros[0]=resultado.getString("idEmpleado");
+                registros[1]=resultado.getString("nombre");
+                registros[2]=resultado.getString("cedula");
+                registros[3]=resultado.getString("cargo");
+                registros[4]=resultado.getString("sueldo");
+                registros[5]=resultado.getString("direccion");
+                registros[6]=resultado.getString("telefono");
+                registros[7]=resultado.getString("correo");
+                registros[8]=resultado.getString("sexo");
+                
+                ModeloTabla.addRow(registros);
+            }
+            tabla.setModel(ModeloTabla);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error en la tabla SQL: "+e);
+        }
+        
+        
+    }
 }

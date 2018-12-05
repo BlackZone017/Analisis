@@ -89,7 +89,7 @@ public class Log_in extends javax.swing.JFrame {
                 IngresarActionPerformed(evt);
             }
         });
-        jPanel1.add(Ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, 160, 30));
+        jPanel1.add(Ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 520, 160, 30));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 153));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -103,8 +103,8 @@ public class Log_in extends javax.swing.JFrame {
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 90, 30));
 
         cboTipo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:", "Administrador", "Empleado" }));
-        jPanel1.add(cboTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 180, 30));
+        cboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingresar Como:", "Administrador", "Empleado" }));
+        jPanel1.add(cboTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, 180, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 600));
 

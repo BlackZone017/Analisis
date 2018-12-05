@@ -121,7 +121,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="110" y="500" width="160" height="30"/>
+              <AbsoluteConstraints x="110" y="520" width="160" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -154,7 +154,7 @@
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
-                <StringItem index="0" value="Seleccione:"/>
+                <StringItem index="0" value="Ingresar Como:"/>
                 <StringItem index="1" value="Administrador"/>
                 <StringItem index="2" value="Empleado"/>
               </StringArray>
@@ -165,7 +165,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="100" y="450" width="180" height="30"/>
+              <AbsoluteConstraints x="100" y="460" width="180" height="30"/>
             </Constraint>
           </Constraints>
         </Component>

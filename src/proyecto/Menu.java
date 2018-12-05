@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package proyecto;
+import proyecto.Informes_y_usuarios.frmAyuda;
 import proyecto.Mantenimiento.frmProducto;
 import proyecto.Mantenimiento.frmEmpleados;
 import proyecto.Mantenimiento.frmClientes;
@@ -11,6 +12,10 @@ import proyecto.Mantenimiento.frmFacturas;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+import proyecto.Consultas.consultaClientes;
+import proyecto.Consultas.consultaEmpleados;
+import proyecto.Consultas.consultaInventario;
+import proyecto.Consultas.consultaProducto;
 import proyecto.Informes_y_usuarios.frmUsuarios;
 import proyecto.Informes_y_usuarios.opcionesInformes;
 
@@ -264,6 +269,15 @@ public class Menu extends javax.swing.JFrame {
 
         mnuCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/anterior.png"))); // NOI18N
         mnuCerrar.setText("Cerrar Sesion ");
+        mnuCerrar.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                mnuCerrarMenuSelected(evt);
+            }
+        });
         jMenuBar1.add(mnuCerrar);
 
         setJMenuBar(jMenuBar1);
@@ -304,18 +318,30 @@ public class Menu extends javax.swing.JFrame {
 
     private void mnuConsultaInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaInventarioActionPerformed
         // TODO add your handling code here:
+        consultaInventario abrir=new consultaInventario();
+        this.escritorio.add(abrir);
+        abrir.show(true);
     }//GEN-LAST:event_mnuConsultaInventarioActionPerformed
 
     private void mnuConsultaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaClientesActionPerformed
         // TODO add your handling code here:
+        consultaClientes abrir=new consultaClientes();
+        this.escritorio.add(abrir);
+        abrir.show(true);
     }//GEN-LAST:event_mnuConsultaClientesActionPerformed
 
     private void mnuConsultaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaEmpleadosActionPerformed
         // TODO add your handling code here:
+        consultaEmpleados abrir=new consultaEmpleados();
+        this.escritorio.add(abrir);
+        abrir.show(true);
     }//GEN-LAST:event_mnuConsultaEmpleadosActionPerformed
 
     private void mnuConsultarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultarProductosActionPerformed
         // TODO add your handling code here:
+        consultaProducto abrir=new consultaProducto();
+        this.escritorio.add(abrir);
+        abrir.show(true);
     }//GEN-LAST:event_mnuConsultarProductosActionPerformed
 
     private void mnuConsultaFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaFacturasActionPerformed
@@ -335,6 +361,17 @@ public class Menu extends javax.swing.JFrame {
         this.escritorio.add(abrir);
         abrir.show(true);
     }//GEN-LAST:event_mnuAgregarUsuarios1ActionPerformed
+
+    private void mnuCerrarMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mnuCerrarMenuSelected
+        // TODO add your handling code here:
+        int resp=JOptionPane.showConfirmDialog(this,"¿Desea Cerrar Sesion?","Salir",JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE);
+        if(resp==0){
+            this.dispose();
+            Log_in a = new Log_in();
+            a.setVisible(true);
+        }
+    }//GEN-LAST:event_mnuCerrarMenuSelected
 
     /**
      * @param args the command line arguments

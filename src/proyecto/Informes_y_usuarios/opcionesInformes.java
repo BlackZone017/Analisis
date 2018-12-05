@@ -175,10 +175,12 @@ public class opcionesInformes extends javax.swing.JInternalFrame {
 
     private void btnReporte6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporte6ActionPerformed
         // TODO add your handling code here:
+        consultas.cantClientesPorMes(tblDatos);
     }//GEN-LAST:event_btnReporte6ActionPerformed
 
     private void btnReporte5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporte5ActionPerformed
         // TODO add your handling code here:
+        consultas.cantClientesHoy(tblDatos);
     }//GEN-LAST:event_btnReporte5ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed

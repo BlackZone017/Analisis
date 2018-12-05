@@ -97,39 +97,37 @@ public class Queries_Clientes {
             JOptionPane.showMessageDialog(null,"El error es: "+e);
         }
     }
-//    
-//    public void buscarPor(String valor,String cbo, JTable tabla){
-//        String [] columnas={"ID Asistente","Nombre","Apellido", "Telefono","Calle","Sector","Numero","Sexo","Email"};
-//        String [] registros=new String[9];
-//        ModeloTabla=new DefaultTableModel(null,columnas);
-//        
-//        query = "SELECT * FROM cliente WHERE "+cbo+" LIKE '"+valor+"%';"; //Query que ejecutare
-//        
-//        try{
-//            conn.conexion(); //hago la conexion
-//            ejecutar = conn.conexion().createStatement(); //creo mi declaracion
-//            resultado=ejecutar.executeQuery(query); //le paso la query a mi declaracion y le paso los valores al result set
-//            
-//            while(resultado.next()){
-//                registros[0]=resultado.getString("id");
-//                registros[1]=resultado.getString("nombre");
-//                registros[2]=resultado.getString("apellido");
-//                registros[3]=resultado.getString("telefono");
-//                registros[4]=resultado.getString("calle");
-//                registros[5]=resultado.getString("sector");
-//                registros[6]=resultado.getString("numero");
-//                registros[7]=resultado.getString("sexo");
-//                registros[8]=resultado.getString("email");
-//                
-//                ModeloTabla.addRow(registros);
-//            }
-//            tabla.setModel(ModeloTabla);
-//        }catch(Exception e){
-//            JOptionPane.showMessageDialog(null,"Error en la tabla SQL: "+e);
-//        }
-//        
-//        
-//    }
+    
+    public void buscarPor(String valor,String cbo, JTable tabla){
+         String [] columnas={"ID Cliente","Nombre","Cedula", "Direccion","Telefono","Correo","Sexo"};
+        String [] registros=new String[7];
+        ModeloTabla=new DefaultTableModel(null,columnas);
+        
+        query = "SELECT * FROM cliente WHERE "+cbo+" LIKE '%"+valor+"%';"; //Query que ejecutare
+        
+        try{
+            conn.conexion(); //hago la conexion
+            ejecutar = conn.conexion().createStatement(); //creo mi declaracion
+            resultado=ejecutar.executeQuery(query); //le paso la query a mi declaracion y le paso los valores al result set
+            
+            while(resultado.next()){
+                registros[0]=resultado.getString("idCliente");
+                registros[1]=resultado.getString("nombre");
+                registros[2]=resultado.getString("cedula");
+                registros[3]=resultado.getString("direccion");
+                registros[4]=resultado.getString("telefono");
+                registros[5]=resultado.getString("correo");
+                registros[6]=resultado.getString("sexo");
+                
+                ModeloTabla.addRow(registros);
+            }
+            tabla.setModel(ModeloTabla);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error en la tabla SQL: "+e);
+        }
+        
+        
+    }
     
     
 }

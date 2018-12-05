@@ -290,9 +290,9 @@ File fichero;
         if (FilaSelec>=0){
             txtNombre.setText(tblDatos.getValueAt(FilaSelec, 1).toString());
             txtCedula.setText(tblDatos.getValueAt(FilaSelec, 2).toString());
-            txtCorreo.setText(tblDatos.getValueAt(FilaSelec, 3).toString());
+            txtCorreo.setText(tblDatos.getValueAt(FilaSelec, 5).toString());
             txtTel.setText(tblDatos.getValueAt(FilaSelec, 4).toString());
-            txtDirecc.setText(tblDatos.getValueAt(FilaSelec, 5).toString());            
+            txtDirecc.setText(tblDatos.getValueAt(FilaSelec, 3).toString());            
             cboSexo.setSelectedItem(tblDatos.getValueAt(FilaSelec, 6).toString());
 
         }else{
