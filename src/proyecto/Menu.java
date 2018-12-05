@@ -13,6 +13,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import proyecto.Consultas.consultaClientes;
+import proyecto.Consultas.consultaDetFactura;
 import proyecto.Consultas.consultaEmpleados;
 import proyecto.Consultas.consultaInventario;
 import proyecto.Consultas.consultaProducto;
@@ -346,6 +347,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void mnuConsultaFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaFacturasActionPerformed
         // TODO add your handling code here:
+        consultaDetFactura abrir=new consultaDetFactura();
+        this.escritorio.add(abrir);
+        abrir.show(true);
     }//GEN-LAST:event_mnuConsultaFacturasActionPerformed
 
     private void mnuAgregarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarUsuariosActionPerformed
